@@ -6,7 +6,7 @@ steps:
       echo 1 | ./eosio_build.sh && \
       echo "--- Compressing build directory :compression:" && \
       tar -pczf build.tar.gz build/
-    label: ":darwin: Build"
+    label: ":darwin: (10.14) Build"
     agents:
       - "role=builder"
       - "os=mojave"
