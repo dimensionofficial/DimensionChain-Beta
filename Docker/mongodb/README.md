@@ -17,6 +17,10 @@ This docker-compose will allow you to run nodeos and MongoDB and sync to any EOS
 
 You need to configure the peers with which you would like to sync. You can do this by editing the ```nodeos/config.ini``` file.
 
+## Create genesis.json
+
+You need to create the genesis.json file at ```nodeos/genesis.json```. This file is specific to the network with which you would like to sync.
+
 ## Start syncing
 
 ```bash
