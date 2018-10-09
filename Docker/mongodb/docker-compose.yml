@@ -1,0 +1,24 @@
+version: "3"
+
+services:
+  mongodb:
+    image: mongo:latest
+    hostname: mongo
+    volumes:
+      - ./mongodb:/data/db
+    expose:
+      - "27017"
+  nodeosd:
+    image: eosio/eos:latest
+    command: nodeosd.sh --data-dir /opt/eosio/bin/data-dir --genesis-json /opt/eosio/bin/data-dir/genesis.json --mongodb-wipe
+    hostname: nodeosd
+    ports:
+      - 8888:8888
+      - 9876:9876
+    expose:
+      - "8888"
+    volumes:
+      - ./nodeos:/opt/eosio/bin/data-dir
+    cap_add:
+      - IPC_LOCK
+    stop_grace_period: 10m
