@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -o pipefail
 # variables
 . ./.cicd/helpers/general.sh
 # tests
@@ -14,6 +14,7 @@ else # Linux
     EXIT_STATUS=$?
 fi
 # buildkite
+set -e
 if [[ "$BUILDKITE" == 'true' ]]; then
     cd build
     # upload artifacts
