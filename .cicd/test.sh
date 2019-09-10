@@ -3,6 +3,7 @@ set -o pipefail
 # variables
 . ./.cicd/helpers/general.sh
 # tests
+set +e # defer ctest error handling to end
 if [[ $(uname) == 'Darwin' ]]; then # macOS
     export PATH=$PATH:~/mongodb/bin
     ./"$@"
