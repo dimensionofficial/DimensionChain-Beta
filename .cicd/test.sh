@@ -14,7 +14,6 @@ else # Linux
     EXIT_STATUS=$?
 fi
 # buildkite
-set -e
 if [[ "$BUILDKITE" == 'true' ]]; then
     cd build
     # upload artifacts
