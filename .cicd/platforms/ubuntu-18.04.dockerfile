@@ -31,13 +31,13 @@ RUN git clone --single-branch --branch release_80 https://git.llvm.org/git/llvm.
     make install && \
     cd / && \
     rm -rf /clang8
-COPY ./.cicd/helpers/clang.make /tmp/clang.cmake
+COPY ./scripts/pinned_toolchain.cmake /tmp/pinned_toolchain.cmake
 # build llvm8
 RUN git clone --depth 1 --single-branch --branch release_80 https://github.com/llvm-mirror/llvm.git llvm && \
     cd llvm && \
     mkdir build && \
     cd build && \
-    cmake -G 'Unix Makefiles' -DLLVM_TARGETS_TO_BUILD=host -DLLVM_BUILD_TOOLS=false -DLLVM_ENABLE_RTTI=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_TOOLCHAIN_FILE='/tmp/clang.cmake' -DCMAKE_EXE_LINKER_FLAGS=-pthread -DCMAKE_SHARED_LINKER_FLAGS=-pthread .. && \
+    cmake -G 'Unix Makefiles' -DLLVM_TARGETS_TO_BUILD=host -DLLVM_BUILD_TOOLS=false -DLLVM_ENABLE_RTTI=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_TOOLCHAIN_FILE='/tmp/pinned_toolchain.cmake' -DCMAKE_EXE_LINKER_FLAGS=-pthread -DCMAKE_SHARED_LINKER_FLAGS=-pthread .. && \
     make -j$(nproc) && \
     make install && \
     cd / && \
