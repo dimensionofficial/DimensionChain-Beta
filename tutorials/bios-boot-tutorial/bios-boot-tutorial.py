@@ -26,6 +26,7 @@ systemAccounts = [
     'eosio.stake',
     'eosio.token',
     'eosio.vpay',
+    'eosio.blkpay',
 ]
 
 def jsonArg(a):
@@ -289,8 +290,11 @@ def stepInstallSystemContracts():
     run(args.cleos + 'set contract eosio.msig ' + args.contracts_dir + '/eosio.msig/')
 def stepCreateTokens():
     run(args.cleos + 'push action eosio.token create \'["eosio", "10000000000.0000 %s"]\' -p eosio.token' % (args.symbol))
-    totalAllocation = allocateFunds(0, len(accounts))
+    totalAllocation = allocateFunds(0, len(accounts)) + 10000000
     run(args.cleos + 'push action eosio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
+    sleep(1)
+def stepTransferToEosioBlkpay():
+    retry(args.cleos + 'transfer eosio eosio.blkpay "%s"' % intToCurrency(10000000))
     sleep(1)
 def stepSetSystemContract():
     retry(args.cleos + 'set contract eosio ' + args.contracts_dir + '/eosio.system/')
@@ -336,6 +340,7 @@ commands = [
     ('s', 'sys',                createSystemAccounts,       True,    "Create system accounts (eosio.*)"),
     ('c', 'contracts',          stepInstallSystemContracts, True,    "Install system contracts (token, msig)"),
     ('t', 'tokens',             stepCreateTokens,           True,    "Create tokens"),
+    ('e', 'blkpay',             stepTransferToEosioBlkpay,  True,    "Transfer to eosio.blkpay"),
     ('S', 'sys-contract',       stepSetSystemContract,      True,    "Set system contract"),
     ('I', 'init-sys-contract',  stepInitSystemContract,     True,    "Initialiaze system contract"),
     ('T', 'stake',              stepCreateStakedAccounts,   True,    "Create staked accounts"),
@@ -366,7 +371,7 @@ parser.add_argument('--max-user-keys', metavar='', help="Maximum user keys to im
 parser.add_argument('--ram-funds', metavar='', help="How much funds for each user to spend on ram", type=float, default=0.1)
 parser.add_argument('--min-stake', metavar='', help="Minimum stake before allocating unstaked funds", type=float, default=0.9)
 parser.add_argument('--max-unstaked', metavar='', help="Maximum unstaked funds", type=float, default=10)
-parser.add_argument('--producer-limit', metavar='', help="Maximum number of producers. (0 = no limit)", type=int, default=4)
+parser.add_argument('--producer-limit', metavar='', help="Maximum number of producers. (0 = no limit)", type=int, default=7)
 parser.add_argument('--min-producer-funds', metavar='', help="Minimum producer funds", type=float, default=1000.0000)
 parser.add_argument('--num-producers-vote', metavar='', help="Number of producers for which each user votes", type=int, default=50)
 parser.add_argument('--num-voters', metavar='', help="Number of voters", type=int, default=10)
