@@ -1531,6 +1531,23 @@ struct sellram_subcommand {
    }
 };
 
+struct staketobp_subcommand {
+   string owner;
+
+   staketobp_subcommand(CLI::App* actionRoot) {
+      auto claim_rewards = actionRoot->add_subcommand("staketobp", localized("Account stake EON to bp"));
+      claim_rewards->add_option("owner", owner, localized("The account to stake"))->required();
+      add_standard_transaction_options(claim_rewards, "owner@active");
+
+      claim_rewards->set_callback([this] {
+         fc::variant act_payload = fc::mutable_variant_object()
+                  ("owner", owner);
+         auto accountPermissions = get_account_permissions(tx_permission, {owner,config::active_name});
+         send_actions({create_action(accountPermissions, config::system_account_name, N(staketobp), act_payload)});
+      });
+   }
+};
+
 struct claimrewards_subcommand {
    string owner;
 
@@ -3847,6 +3864,7 @@ int main( int argc, char** argv ) {
    auto buyram = buyram_subcommand(system);
    auto sellram = sellram_subcommand(system);
 
+   auto stakeToBp = staketobp_subcommand(system);
    auto claimRewards = claimrewards_subcommand(system);
 
    auto regProxy = regproxy_subcommand(system);
