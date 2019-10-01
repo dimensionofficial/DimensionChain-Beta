@@ -576,6 +576,15 @@ fc::variant regproducer_variant(const account_name& producer, const public_key_t
             ;
 }
 
+fc::variant staketognode_variant(const account_name& owner, const public_key_type& key, const string& url, uint16_t location) {
+   return fc::mutable_variant_object()
+            ("owner", owner)
+            ("producer_key", key)
+            ("url", url)
+            ("location", location)
+            ;
+}
+
 chain::action create_open(const string& contract, const name& owner, symbol sym, const name& ram_payer) {
    auto open_ = fc::mutable_variant_object
       ("owner", owner)
@@ -1533,18 +1542,36 @@ struct sellram_subcommand {
 
 struct staketognode_subcommand {
    string owner;
+   string producer_key_str;
+   string url;
+   uint16_t loc = 0;
 
    staketognode_subcommand(CLI::App* actionRoot) {
-      auto claim_rewards = actionRoot->add_subcommand("staketognode", localized("Account stake EON to governance node"));
-      claim_rewards->add_option("owner", owner, localized("The account to stake"))->required();
-      add_standard_transaction_options(claim_rewards, "owner@active");
+      auto stake_to_gnode = actionRoot->add_subcommand("staketognode", localized("Account stake EON to governance node"));
+      stake_to_gnode->add_option("owner", owner, localized("The account to stake"))->required();
+      stake_to_gnode->add_option("producer_key", producer_key_str, localized("The producer's public key"))->required();
+      stake_to_gnode->add_option("url", url, localized("url where info about producer can be found"), true);
+      stake_to_gnode->add_option("location", loc, localized("relative location for purpose of nearest neighbor scheduling"), true);
+      add_standard_transaction_options(stake_to_gnode, "owner@active");
 
-      claim_rewards->set_callback([this] {
-         fc::variant act_payload = fc::mutable_variant_object()
-                  ("owner", owner);
+      stake_to_gnode->set_callback([this] {
+         public_key_type producer_key;
+         try {
+            producer_key = public_key_type(producer_key_str);
+         } EOS_RETHROW_EXCEPTIONS(public_key_type_exception, "Invalid producer public key: ${public_key}", ("public_key", producer_key_str))
+
+         auto staketognode_var = staketognode_variant(owner, producer_key, url, loc );
          auto accountPermissions = get_account_permissions(tx_permission, {owner,config::active_name});
-         send_actions({create_action(accountPermissions, config::system_account_name, N(staketognode), act_payload)});
+         send_actions({create_action(accountPermissions, config::system_account_name, N(staketognode), staketognode_var)});
       });
+
+
+    //   stake_to_gnode->set_callback([this] {
+    //      fc::variant act_payload = fc::mutable_variant_object()
+    //               ("owner", owner);
+    //      auto accountPermissions = get_account_permissions(tx_permission, {owner,config::active_name});
+    //      send_actions({create_action(accountPermissions, config::system_account_name, N(staketognode), act_payload)});
+    //   });
    }
 };
 
