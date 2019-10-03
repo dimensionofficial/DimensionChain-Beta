@@ -1592,6 +1592,50 @@ struct claimrewards_subcommand {
    }
 };
 
+// struct voteproposal_subcommand {
+//    string voter;
+
+//    voteproposal_subcommand(CLI::App* actionRoot) {
+//       auto claim_rewards = actionRoot->add_subcommand("voteproposal", localized("Vote proposal"));
+//       claim_rewards->add_option("voter", voter, localized("The account to claim rewards for"))->required();
+//       add_standard_transaction_options(claim_rewards, "voter@active");
+
+//       claim_rewards->set_callback([this] {
+//          fc::variant act_payload = fc::mutable_variant_object()
+//                   ("voter", voter)
+//                   ("proposal_id", )
+//                   ("");
+//          auto accountPermissions = get_account_permissions(tx_permission, {voter,config::active_name});
+//          send_actions({create_action(accountPermissions, config::system_account_name, N(voteproposal), act_payload)});
+//       });
+//    }
+// };
+
+
+struct voteproposal_subcommand {
+    string owner_str;
+    string id;
+    bool vote;
+
+    voteproposal_subcommand(CLI::App* actionRoot) {
+        auto vote_proposal = actionRoot->add_subcommand("voteproposal", localized("Vote governance proposal"));
+        vote_proposal->add_option("owner", owner_str, localized("The voting user"))->required();
+        vote_proposal->add_option("proposal_id", id, localized("The id of voting proposal"))->required();
+        vote_proposal->add_option("vote", vote, localized("Vote of voting proposal"))->required();
+        add_standard_transaction_options(vote_proposal);
+        vote_proposal->set_callback([this] {
+            fc::variant act_payload = fc::mutable_variant_object()
+               ("voter_name", owner_str)
+               ("proposal_id", id)
+               ("yea", vote);
+               
+            send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(voteproposal), act_payload)});
+         });
+
+    }
+
+};
+
 struct regproxy_subcommand {
    string proxy;
 
@@ -3893,6 +3937,7 @@ int main( int argc, char** argv ) {
 
    auto stakeToGnode = staketognode_subcommand(system);
    auto claimRewards = claimrewards_subcommand(system);
+   auto voteproposal = voteproposal_subcommand(system);
 
    auto regProxy = regproxy_subcommand(system);
    auto unregProxy = unregproxy_subcommand(system);
