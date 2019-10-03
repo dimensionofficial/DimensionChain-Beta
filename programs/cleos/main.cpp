@@ -1614,7 +1614,7 @@ struct claimrewards_subcommand {
 
 struct voteproposal_subcommand {
     string owner_str;
-    string id;
+    uint64_t id;
     bool vote;
 
     voteproposal_subcommand(CLI::App* actionRoot) {
@@ -1622,7 +1622,7 @@ struct voteproposal_subcommand {
         vote_proposal->add_option("owner", owner_str, localized("The voting user"))->required();
         vote_proposal->add_option("proposal_id", id, localized("The id of voting proposal"))->required();
         vote_proposal->add_option("vote", vote, localized("Vote of voting proposal"))->required();
-        add_standard_transaction_options(vote_proposal);
+        add_standard_transaction_options(vote_proposal, "owner@active");
         vote_proposal->set_callback([this] {
             fc::variant act_payload = fc::mutable_variant_object()
                ("voter_name", owner_str)
@@ -1630,6 +1630,27 @@ struct voteproposal_subcommand {
                ("yea", vote);
                
             send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(voteproposal), act_payload)});
+         });
+
+    }
+
+};
+
+struct execproposal_subcommand {
+    string owner_str;
+    uint64_t id;
+
+    execproposal_subcommand(CLI::App* actionRoot) {
+        auto exec_proposal = actionRoot->add_subcommand("execproposal", localized("Execute governance proposal"));
+        exec_proposal->add_option("owner", owner_str, localized("The exec user"))->required();
+        exec_proposal->add_option("proposal_id", id, localized("The id of exec proposal"))->required();
+        add_standard_transaction_options(exec_proposal, "owner@active");
+        exec_proposal->set_callback([this] {
+            fc::variant act_payload = fc::mutable_variant_object()
+               ("owner", owner_str)
+               ("proposal_id", id);
+               
+            send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(execproposal), act_payload)});
          });
 
     }
@@ -3938,6 +3959,7 @@ int main( int argc, char** argv ) {
    auto stakeToGnode = staketognode_subcommand(system);
    auto claimRewards = claimrewards_subcommand(system);
    auto voteproposal = voteproposal_subcommand(system);
+   auto execproposal = execproposal_subcommand(system);
 
    auto regProxy = regproxy_subcommand(system);
    auto unregProxy = unregproxy_subcommand(system);
