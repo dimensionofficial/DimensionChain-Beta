@@ -1592,25 +1592,33 @@ struct claimrewards_subcommand {
    }
 };
 
-// struct voteproposal_subcommand {
-//    string voter;
+struct newproposal_subcommand {
+    string owner_str;
+    string account;
+    uint32_t block_height;
+    int16_t type;
+    int16_t status;
 
-//    voteproposal_subcommand(CLI::App* actionRoot) {
-//       auto claim_rewards = actionRoot->add_subcommand("voteproposal", localized("Vote proposal"));
-//       claim_rewards->add_option("voter", voter, localized("The account to claim rewards for"))->required();
-//       add_standard_transaction_options(claim_rewards, "voter@active");
-
-//       claim_rewards->set_callback([this] {
-//          fc::variant act_payload = fc::mutable_variant_object()
-//                   ("voter", voter)
-//                   ("proposal_id", )
-//                   ("");
-//          auto accountPermissions = get_account_permissions(tx_permission, {voter,config::active_name});
-//          send_actions({create_action(accountPermissions, config::system_account_name, N(voteproposal), act_payload)});
-//       });
-//    }
-// };
-
+    newproposal_subcommand(CLI::App* actionRoot) {
+        auto new_proposal = actionRoot->add_subcommand("newproposal", localized("New governance proposal"));
+        new_proposal->add_option("owner", owner_str, localized("The owner of created proposal"))->required();
+        new_proposal->add_option("account", account, localized("The governance proposal about whom"))->required();
+        new_proposal->add_option("block_height", block_height, localized("The block height that proposal execute"))->required();
+        new_proposal->add_option("type", type, localized("type 1: add bp 2: remove bp 3: switch consensus"))->required();
+        new_proposal->add_option("status", status, localized("The proposal status"))->required();
+        add_standard_transaction_options(new_proposal, "owner@active");
+        new_proposal->set_callback([this] {
+            fc::variant act_payload = fc::mutable_variant_object()
+               ("owner", owner_str)
+               ("account", account)
+               ("block_height", block_height)
+               ("type", type)
+               ("status", status);
+               
+            send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(newproposal), act_payload)});
+         });
+    }
+};
 
 struct voteproposal_subcommand {
     string owner_str;
@@ -1631,9 +1639,7 @@ struct voteproposal_subcommand {
                
             send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(voteproposal), act_payload)});
          });
-
     }
-
 };
 
 struct execproposal_subcommand {
@@ -1652,9 +1658,7 @@ struct execproposal_subcommand {
                
             send_actions({create_action({permission_level{owner_str,config::active_name}}, config::system_account_name, N(execproposal), act_payload)});
          });
-
     }
-
 };
 
 struct regproxy_subcommand {
@@ -3958,6 +3962,7 @@ int main( int argc, char** argv ) {
 
    auto stakeToGnode = staketognode_subcommand(system);
    auto claimRewards = claimrewards_subcommand(system);
+   auto newproposal = newproposal_subcommand(system);
    auto voteproposal = voteproposal_subcommand(system);
    auto execproposal = execproposal_subcommand(system);
 
