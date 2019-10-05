@@ -585,6 +585,15 @@ fc::variant staketognode_variant(const account_name& owner, const public_key_typ
             ;
 }
 
+fc::variant updategnode_variant(const account_name& owner, const public_key_type& key, const string& url, uint16_t location) {
+   return fc::mutable_variant_object()
+            ("owner", owner)
+            ("producer_key", key)
+            ("url", url)
+            ("location", location)
+            ;
+}
+
 chain::action create_open(const string& contract, const name& owner, symbol sym, const name& ram_payer) {
    auto open_ = fc::mutable_variant_object
       ("owner", owner)
@@ -1549,9 +1558,9 @@ struct staketognode_subcommand {
    staketognode_subcommand(CLI::App* actionRoot) {
       auto stake_to_gnode = actionRoot->add_subcommand("staketognode", localized("Account stake EON to governance node"));
       stake_to_gnode->add_option("owner", owner, localized("The account to stake"))->required();
-      stake_to_gnode->add_option("producer_key", producer_key_str, localized("The producer's public key"))->required();
-      stake_to_gnode->add_option("url", url, localized("url where info about producer can be found"), true);
-      stake_to_gnode->add_option("location", loc, localized("relative location for purpose of nearest neighbor scheduling"), true);
+      stake_to_gnode->add_option("producer_key", producer_key_str, localized("The public key for produce block"))->required();
+      stake_to_gnode->add_option("url", url, localized("Url where info about governance node can be found"), true);
+      stake_to_gnode->add_option("location", loc, localized("Relative location for purpose of nearest neighbor scheduling"), true);
       add_standard_transaction_options(stake_to_gnode, "owner@active");
 
       stake_to_gnode->set_callback([this] {
@@ -1572,6 +1581,33 @@ struct staketognode_subcommand {
     //      auto accountPermissions = get_account_permissions(tx_permission, {owner,config::active_name});
     //      send_actions({create_action(accountPermissions, config::system_account_name, N(staketognode), act_payload)});
     //   });
+   }
+};
+
+struct updategnode_subcommand {
+   string owner;
+   string producer_key_str;
+   string url;
+   uint16_t loc = 0;
+
+   updategnode_subcommand(CLI::App* actionRoot) {
+      auto update_gnode = actionRoot->add_subcommand("updategnode", localized("Update governance node info: producer key, url, location"));
+      update_gnode->add_option("owner", owner, localized("The governance node"))->required();
+      update_gnode->add_option("producer_key", producer_key_str, localized("The new producer key"))->required();
+      update_gnode->add_option("url", url, localized("New url where info about governance node can be found"), true);
+      update_gnode->add_option("location", loc, localized("New relative location for purpose of nearest neighbor scheduling"), true);
+      add_standard_transaction_options(update_gnode, "owner@active");
+
+      update_gnode->set_callback([this] {
+         public_key_type producer_key;
+         try {
+            producer_key = public_key_type(producer_key_str);
+         } EOS_RETHROW_EXCEPTIONS(public_key_type_exception, "Invalid producer public key: ${public_key}", ("public_key", producer_key_str))
+
+         auto updategnode_var = updategnode_variant(owner, producer_key, url, loc );
+         auto accountPermissions = get_account_permissions(tx_permission, {owner,config::active_name});
+         send_actions({create_action(accountPermissions, config::system_account_name, N(updategnode), updategnode_var)});
+      });
    }
 };
 
@@ -3961,6 +3997,7 @@ int main( int argc, char** argv ) {
    auto sellram = sellram_subcommand(system);
 
    auto stakeToGnode = staketognode_subcommand(system);
+   auto updateGnode = updategnode_subcommand(system);
    auto claimRewards = claimrewards_subcommand(system);
    auto newproposal = newproposal_subcommand(system);
    auto voteproposal = voteproposal_subcommand(system);
