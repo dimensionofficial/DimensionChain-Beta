@@ -47,6 +47,7 @@ def retry(args):
         logFile.write(args + '\n')
         if subprocess.call(args, shell=True):
             print('*** Retry')
+            sleep(0.5)
         else:
             break
 
@@ -191,6 +192,12 @@ def newProposals(b, e):
     for i in range(b, e):
         a = accounts[i]
         retry(args.cleos + 'system newproposal ' + a['name'] + ' ' + a['name'] + ' 100000' + ' 1' + ' 0')
+
+def voteProposals(b, e):
+    for i in range(b, e):
+        for j in range(0, len(accounts)):
+            a = accounts[j]
+            retry(args.cleos + 'system voteproposal ' + a['name'] + ' ' + str(i) + ' 1')
 
 def listProducers():
     run(args.cleos + 'system listproducers')
@@ -339,6 +346,16 @@ def stepNewProposals():
     sleep(1)
     listProposals()
 
+def stepVoteProposals():
+    voteProposals(0, 0 + numProducers)
+    sleep(1)
+    listProposals()
+
+def stepExecProposals():
+    # voteProposals(0, 0 + numProducers)
+    sleep(1)
+    # listProposals()
+
 
     
 def stepStartProducers():
@@ -382,6 +399,8 @@ commands = [
     ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
     ('g', 'stake-gnode',        stepStakeGnodes,            True,    "Stake to goverance node"), # dimension stake to gnode
     ('n', 'new-prop',           stepNewProposals,           True,    "New proposals"), # dimension 创建提案
+    ('V', 'vote-prop',          stepVoteProposals,          True,    "Vote proposals"), # dimension 对提案投票
+    ('E', 'exec-prop',          stepExecProposals,          False,   "Ecec proposals"), # dimension 执行提案
     ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
     ('q', 'resign',             stepResign,                 True,    "Resign eosio"),
     ('m', 'msg-replace',        msigReplaceSystem,          False,   "Replace system contract using msig"),
