@@ -182,8 +182,24 @@ def regProducers(b, e):
         a = accounts[i]
         retry(args.cleos + 'system regproducer ' + a['name'] + ' ' + a['pub'] + ' https://' + a['name'] + '.com' + '/' + a['pub'])
 
+def stakeGnodes(b, e):
+    for i in range(b, e):
+        a = accounts[i]
+        retry(args.cleos + 'system staketognode ' + a['name'] + ' ' + a['pub'] + ' https://' + a['name'] + '.com' + '/' + a['pub'])
+
+def newProposals(b, e):
+    for i in range(b, e):
+        a = accounts[i]
+        retry(args.cleos + 'system newproposal ' + a['name'] + ' ' + a['name'] + ' 100000' + ' 1' + ' 0')
+
 def listProducers():
     run(args.cleos + 'system listproducers')
+
+def listGnodes():
+    run(args.cleos + 'get table eosio eosio gnode')
+
+def listProposals():
+    run(args.cleos + 'get table eosio eosio proposals')
 
 def vote(b, e):
     for i in range(b, e):
@@ -311,6 +327,20 @@ def stepRegProducers():
     regProducers(firstProducer, firstProducer + numProducers)
     sleep(1)
     listProducers()
+
+
+def stepStakeGnodes():
+    stakeGnodes(firstProducer, firstProducer + numProducers)
+    sleep(1)
+    listGnodes()
+
+def stepNewProposals():
+    newProposals(firstProducer, firstProducer + numProducers)
+    sleep(1)
+    listProposals()
+
+
+    
 def stepStartProducers():
     startProducers(firstProducer, firstProducer + numProducers)
     sleep(args.producer_sync_delay)
@@ -342,7 +372,7 @@ commands = [
     ('s', 'sys',                createSystemAccounts,       True,    "Create system accounts (eosio.*)"),
     ('c', 'contracts',          stepInstallSystemContracts, True,    "Install system contracts (token, msig)"),
     ('t', 'tokens',             stepCreateTokens,           True,    "Create tokens"),
-    ('e', 'blkpay',             stepTransferToEosioBlkpay,  True,    "Transfer to eosio.blkpay"),
+    ('e', 'blkpay',             stepTransferToEosioBlkpay,  True,    "Transfer to eosio.blkpay"), # dimension 出块奖励账号
     ('S', 'sys-contract',       stepSetSystemContract,      True,    "Set system contract"),
     ('I', 'init-sys-contract',  stepInitSystemContract,     True,    "Initialiaze system contract"),
     ('T', 'stake',              stepCreateStakedAccounts,   True,    "Create staked accounts"),
@@ -350,6 +380,8 @@ commands = [
     ('P', 'start-prod',         stepStartProducers,         True,    "Start producers"),
     ('v', 'vote',               stepVote,                   True,    "Vote for producers"),
     ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
+    ('g', 'stake-gnode',        stepStakeGnodes,            True,    "Stake to goverance node"), # dimension stake to gnode
+    ('n', 'new-prop',           stepNewProposals,           True,    "New proposals"), # dimension 创建提案
     ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
     ('q', 'resign',             stepResign,                 True,    "Resign eosio"),
     ('m', 'msg-replace',        msigReplaceSystem,          False,   "Replace system contract using msig"),
