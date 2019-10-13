@@ -199,6 +199,13 @@ def voteProposals(b, e):
             a = accounts[j]
             retry(args.cleos + 'system voteproposal ' + a['name'] + ' ' + str(i) + ' 1')
 
+def execProposals(b, e):
+    for i in range(b, e):
+        a = accounts[i]
+        retry(args.cleos + 'system execproposal ' + a['name'] + ' ' + str(i))
+
+
+
 def listProducers():
     run(args.cleos + 'system listproducers')
 
@@ -352,7 +359,7 @@ def stepVoteProposals():
     listProposals()
 
 def stepExecProposals():
-    # voteProposals(0, 0 + numProducers)
+    execProposals(0, 0 + numProducers)
     sleep(1)
     # listProposals()
 
@@ -396,11 +403,11 @@ commands = [
     ('p', 'reg-prod',           stepRegProducers,           True,    "Register producers"),
     ('P', 'start-prod',         stepStartProducers,         True,    "Start producers"),
     ('v', 'vote',               stepVote,                   True,    "Vote for producers"),
-    ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
-    ('g', 'stake-gnode',        stepStakeGnodes,            True,    "Stake to goverance node"), # dimension stake to gnode
+    ('g', 'stake-gnode',        stepStakeGnodes,            True,    "Stake to goverance node"), # dimension 抵押EON成为gnode
     ('n', 'new-prop',           stepNewProposals,           True,    "New proposals"), # dimension 创建提案
     ('V', 'vote-prop',          stepVoteProposals,          True,    "Vote proposals"), # dimension 对提案投票
     ('E', 'exec-prop',          stepExecProposals,          False,   "Ecec proposals"), # dimension 执行提案
+    ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
     ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
     ('q', 'resign',             stepResign,                 True,    "Resign eosio"),
     ('m', 'msg-replace',        msigReplaceSystem,          False,   "Replace system contract using msig"),
