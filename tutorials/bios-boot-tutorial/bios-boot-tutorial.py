@@ -202,7 +202,7 @@ def voteProposals(b, e):
 def execProposals(b, e):
     for i in range(b, e):
         a = accounts[i]
-        retry(args.cleos + 'system execproposal ' + a['name'] + ' ' + str(i))
+        retry(args.cleos + 'system execproposal ' + a['name'] + ' ' + str(i-b))
 
 
 
@@ -359,7 +359,7 @@ def stepVoteProposals():
     listProposals()
 
 def stepExecProposals():
-    execProposals(0, 0 + numProducers)
+    execProposals(firstProducer, firstProducer + numProducers)
     sleep(1)
     # listProposals()
 
@@ -400,15 +400,15 @@ commands = [
     ('S', 'sys-contract',       stepSetSystemContract,      True,    "Set system contract"),
     ('I', 'init-sys-contract',  stepInitSystemContract,     True,    "Initialiaze system contract"),
     ('T', 'stake',              stepCreateStakedAccounts,   True,    "Create staked accounts"),
-    ('p', 'reg-prod',           stepRegProducers,           True,    "Register producers"),
+    # ('p', 'reg-prod',           stepRegProducers,           True,    "Register producers"),
     ('P', 'start-prod',         stepStartProducers,         True,    "Start producers"),
-    ('v', 'vote',               stepVote,                   True,    "Vote for producers"),
+    # ('v', 'vote',               stepVote,                   True,    "Vote for producers"),
     ('g', 'stake-gnode',        stepStakeGnodes,            True,    "Stake to goverance node"), # dimension 抵押EON成为gnode
     ('n', 'new-prop',           stepNewProposals,           True,    "New proposals"), # dimension 创建提案
     ('V', 'vote-prop',          stepVoteProposals,          True,    "Vote proposals"), # dimension 对提案投票
-    ('E', 'exec-prop',          stepExecProposals,          False,   "Ecec proposals"), # dimension 执行提案
+    ('E', 'exec-prop',          stepExecProposals,          True,   "Ecec proposals"), # dimension 执行提案
     ('R', 'claim',              claimRewards,               True,    "Claim rewards"),
-    ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
+    # ('x', 'proxy',              stepProxyVotes,             True,    "Proxy votes"),
     ('q', 'resign',             stepResign,                 True,    "Resign eosio"),
     ('m', 'msg-replace',        msigReplaceSystem,          False,   "Replace system contract using msig"),
     ('X', 'xfer',               stepTransfer,               False,   "Random transfer tokens (infinite loop)"),
