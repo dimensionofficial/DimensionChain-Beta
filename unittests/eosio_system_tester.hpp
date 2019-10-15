@@ -39,22 +39,22 @@ public:
 
       produce_blocks( 2 );
 
-      create_accounts({ N(eosio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake),
+      create_accounts({ N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake),
                N(eosio.bpay), N(eosio.vpay), N(eosio.saving), N(eosio.names) });
 
       produce_blocks( 100 );
 
-      set_code( N(eosio.token), contracts::eosio_token_wasm() );
-      set_abi( N(eosio.token), contracts::eosio_token_abi().data() );
+      set_code( N(eonio.token), contracts::eosio_token_wasm() );
+      set_abi( N(eonio.token), contracts::eosio_token_abi().data() );
 
       {
-         const auto& accnt = control->db().get<account_object,by_name>( N(eosio.token) );
+         const auto& accnt = control->db().get<account_object,by_name>( N(eonio.token) );
          abi_def abi;
          BOOST_REQUIRE_EQUAL(abi_serializer::to_abi(accnt.abi, abi), true);
          token_abi_ser.set_abi(abi, abi_serializer_max_time);
       }
 
-      create_currency( N(eosio.token), config::system_account_name, core_from_string("10000000000.0000") );
+      create_currency( N(eonio.token), config::system_account_name, core_from_string("10000000000.0000") );
       issue(config::system_account_name,      core_from_string("1000000000.0000"));
       BOOST_REQUIRE_EQUAL( core_from_string("1000000000.0000"), get_balance( "eosio" ) );
 
@@ -335,7 +335,7 @@ public:
    }
 
    asset get_balance( const account_name& act ) {
-      vector<char> data = get_row_by_account( N(eosio.token), act, N(accounts), symbol(CORE_SYMBOL).to_symbol_code().value );
+      vector<char> data = get_row_by_account( N(eonio.token), act, N(accounts), symbol(CORE_SYMBOL).to_symbol_code().value );
       return data.empty() ? asset(0, symbol(CORE_SYMBOL)) : token_abi_ser.binary_to_variant("account", data, abi_serializer_max_time)["balance"].as<asset>();
    }
 
@@ -363,14 +363,14 @@ public:
    }
 
    void issue( name to, const asset& amount, name manager = config::system_account_name ) {
-      base_tester::push_action( N(eosio.token), N(issue), manager, mutable_variant_object()
+      base_tester::push_action( N(eonio.token), N(issue), manager, mutable_variant_object()
                                 ("to",      to )
                                 ("quantity", amount )
                                 ("memo", "")
                                 );
    }
    void transfer( name from, name to, const asset& amount, name manager = config::system_account_name ) {
-      base_tester::push_action( N(eosio.token), N(transfer), manager, mutable_variant_object()
+      base_tester::push_action( N(eonio.token), N(transfer), manager, mutable_variant_object()
                                 ("from",    from)
                                 ("to",      to )
                                 ("quantity", amount)
@@ -390,7 +390,7 @@ public:
    fc::variant get_stats( const string& symbolname ) {
       auto symb = eosio::chain::symbol::from_string(symbolname);
       auto symbol_code = symb.to_symbol_code().value;
-      vector<char> data = get_row_by_account( N(eosio.token), symbol_code, N(stat), symbol_code );
+      vector<char> data = get_row_by_account( N(eonio.token), symbol_code, N(stat), symbol_code );
       return data.empty() ? fc::variant() : token_abi_ser.binary_to_variant( "currency_stats", data, abi_serializer_max_time );
    }
 

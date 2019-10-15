@@ -17,18 +17,18 @@ unlockTimeout = 999999999
 fastUnstakeSystem = './fast.refund/eosio.system/eosio.system.wasm'
 
 systemAccounts = [
-    'eosio.bpay',
-    'eosio.msig',
-    'eosio.names',
-    'eosio.ram',
-    'eosio.ramfee',
-    'eosio.saving',
-    'eosio.stake',
-    'eosio.token',
-    'eosio.vpay',
-    'eosio.blkpay',
-    'eosio.bpstk',
-    'eosio.prop',
+    'eonio.bpay',
+    'eonio.msig',
+    'eonio.names',
+    'eonio.ram',
+    'eonio.ramfee',
+    'eonio.saving',
+    'eonio.stake',
+    'eonio.token',
+    'eonio.vpay',
+    'eonio.blkpay',
+    'eonio.bpstk',
+    'eonio.prop',
 ]
 
 def jsonArg(a):
@@ -318,20 +318,20 @@ def stepStartBoot():
     startNode(0, {'name': 'eosio', 'pvt': args.private_key, 'pub': args.public_key})
     sleep(10)
 def stepInstallSystemContracts():
-    run(args.cleos + 'set contract eosio.token ' + args.contracts_dir + '/eosio.token/')
-    run(args.cleos + 'set contract eosio.msig ' + args.contracts_dir + '/eosio.msig/')
+    run(args.cleos + 'set contract eonio.token ' + args.contracts_dir + '/eonio.token/')
+    run(args.cleos + 'set contract eonio.msig ' + args.contracts_dir + '/eosio.msig/')
 def stepCreateTokens():
-    run(args.cleos + 'push action eosio.token create \'["eosio", "20000000000.0000 %s"]\' -p eosio.token' % (args.symbol))
+    run(args.cleos + 'push action eonio.token create \'["eosio", "20000000000.0000 %s"]\' -p eonio.token' % (args.symbol))
     totalAllocation = allocateFunds(0, len(accounts)) + 10000000
-    run(args.cleos + 'push action eosio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
+    run(args.cleos + 'push action eonio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
     sleep(1)
 def stepTransferToEosioBlkpay():
-    retry(args.cleos + 'transfer eosio eosio.blkpay "%s"' % intToCurrency(10000000))
+    retry(args.cleos + 'transfer eosio eonio.blkpay "%s"' % intToCurrency(10000000))
     sleep(1)
 def stepSetSystemContract():
     retry(args.cleos + 'set contract eosio ' + args.contracts_dir + '/eosio.system/')
     sleep(1)
-    run(args.cleos + 'push action eosio setpriv' + jsonArg(['eosio.msig', 1]) + '-p eosio@active')
+    run(args.cleos + 'push action eosio setpriv' + jsonArg(['eonio.msig', 1]) + '-p eosio@active')
 def stepInitSystemContract():
     run(args.cleos + 'push action eosio init' + jsonArg(['0', '4,SYS']) + '-p eosio@active')
     sleep(1)
@@ -376,7 +376,7 @@ def stepVote():
 def stepProxyVotes():
     proxyVotes(0, 0 + args.num_voters)
 def stepResign():
-    resign('eosio', 'eosio.prods')
+    resign('eosio', 'eonio.prods')
     for a in systemAccounts:
         resign(a, 'eosio')
 def stepTransfer():
@@ -420,7 +420,7 @@ parser.add_argument('--private-Key', metavar='', help="EOSIO Private Key", defau
 parser.add_argument('--cleos', metavar='', help="Cleos command", default='../../build/programs/cleos/cleos --wallet-url http://127.0.0.1:6666 ')
 parser.add_argument('--nodeos', metavar='', help="Path to nodeos binary", default='../../build/programs/nodeos/nodeos')
 parser.add_argument('--keosd', metavar='', help="Path to keosd binary", default='../../build/programs/keosd/keosd')
-parser.add_argument('--contracts-dir', metavar='', help="Path to contracts directory", default='../../../eosio.contracts/build/contracts/')
+parser.add_argument('--contracts-dir', metavar='', help="Path to contracts directory", default='../../../eosio.contracts/build/contracts')
 parser.add_argument('--nodes-dir', metavar='', help="Path to nodes directory", default='./nodes/')
 parser.add_argument('--genesis', metavar='', help="Path to genesis.json", default="./genesis.json")
 parser.add_argument('--wallet-dir', metavar='', help="Path to wallet directory", default='./wallet/')
