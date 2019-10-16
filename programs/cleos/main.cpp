@@ -3588,7 +3588,7 @@ int main( int argc, char** argv ) {
          ("requested", requested_perm_var)
          ("trx", trx_var);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "propose", variant_to_bin( N(eosio.msig), N(propose), args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", "propose", variant_to_bin( N(eonio.msig), N(propose), args ) }});
    });
 
    //multisig propose transaction
@@ -3628,7 +3628,7 @@ int main( int argc, char** argv ) {
          ("requested", requested_perm_var)
          ("trx", trx_var);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "propose", variant_to_bin( N(eosio.msig), N(propose), args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", "propose", variant_to_bin( N(eonio.msig), N(propose), args ) }});
    });
 
 
@@ -3641,7 +3641,7 @@ int main( int argc, char** argv ) {
 
    review->set_callback([&] {
       const auto result1 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                 ("code", "eosio.msig")
+                                 ("code", "eonio.msig")
                                  ("scope", proposer)
                                  ("table", "proposal")
                                  ("table_key", "")
@@ -3677,7 +3677,7 @@ int main( int argc, char** argv ) {
 
          try {
             const auto& result2 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                       ("code", "eosio.msig")
+                                       ("code", "eonio.msig")
                                        ("scope", proposer)
                                        ("table", "approvals2")
                                        ("table_key", "")
@@ -3709,7 +3709,7 @@ int main( int argc, char** argv ) {
             }
          } else {
             const auto result3 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                       ("code", "eosio.msig")
+                                       ("code", "eonio.msig")
                                        ("scope", proposer)
                                        ("table", "approvals")
                                        ("table_key", "")
@@ -3742,8 +3742,8 @@ int main( int argc, char** argv ) {
          if( new_multisig ) {
             for( auto& a : provided_approvers ) {
                const auto result4 = call(get_table_func, fc::mutable_variant_object("json", true)
-                                          ("code", "eosio.msig")
-                                          ("scope", "eosio.msig")
+                                          ("code", "eonio.msig")
+                                          ("scope", "eonio.msig")
                                           ("table", "invals")
                                           ("table_key", "")
                                           ("lower_bound", a.first.value)
@@ -3848,7 +3848,7 @@ int main( int argc, char** argv ) {
       }
 
       auto accountPermissions = get_account_permissions(tx_permission, {proposer,config::active_name});
-      send_actions({chain::action{accountPermissions, "eosio.msig", action, variant_to_bin( N(eosio.msig), action, args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", action, variant_to_bin( N(eonio.msig), action, args ) }});
    };
 
    // multisig approve
@@ -3878,7 +3878,7 @@ int main( int argc, char** argv ) {
          ("account", invalidator);
 
       auto accountPermissions = get_account_permissions(tx_permission, {invalidator,config::active_name});
-      send_actions({chain::action{accountPermissions, "eosio.msig", "invalidate", variant_to_bin( N(eosio.msig), "invalidate", args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", "invalidate", variant_to_bin( N(eonio.msig), "invalidate", args ) }});
    });
 
    // multisig cancel
@@ -3905,7 +3905,7 @@ int main( int argc, char** argv ) {
          ("proposal_name", proposal_name)
          ("canceler", canceler);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "cancel", variant_to_bin( N(eosio.msig), N(cancel), args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", "cancel", variant_to_bin( N(eonio.msig), N(cancel), args ) }});
       }
    );
 
@@ -3934,7 +3934,7 @@ int main( int argc, char** argv ) {
          ("proposal_name", proposal_name)
          ("executer", executer);
 
-      send_actions({chain::action{accountPermissions, "eosio.msig", "exec", variant_to_bin( N(eosio.msig), N(exec), args ) }});
+      send_actions({chain::action{accountPermissions, "eonio.msig", "exec", variant_to_bin( N(eonio.msig), N(exec), args ) }});
       }
    );
 

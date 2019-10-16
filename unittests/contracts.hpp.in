@@ -31,7 +31,7 @@ namespace eosio {
       struct contracts {
          // Contracts in `eos/unittests/contracts' directory
          MAKE_READ_WASM_ABI(eosio_bios,   eosio.bios, contracts)
-         MAKE_READ_WASM_ABI(eosio_msig,   eosio.msig, contracts)
+         MAKE_READ_WASM_ABI(eosio_msig,   eonio.msig, contracts)
          MAKE_READ_WASM_ABI(eosio_system, eosio.system, contracts)
          MAKE_READ_WASM_ABI(eosio_token,  eonio.token,  contracts)
          MAKE_READ_WASM_ABI(eosio_wrap,   eosio.wrap,   contracts)

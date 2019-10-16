@@ -192,28 +192,28 @@ BOOST_AUTO_TEST_SUITE(bootseq_tests)
 BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
     try {
 
-        // Create eosio.msig and eonio.token
-        create_accounts({N(eosio.msig), N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake), N(eosio.vpay), N(eosio.bpay), N(eosio.saving) });
+        // Create eonio.msig and eonio.token
+        create_accounts({N(eonio.msig), N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake), N(eosio.vpay), N(eosio.bpay), N(eosio.saving) });
         // Set code for the following accounts:
         //  - eosio (code: eosio.bios) (already set by tester constructor)
-        //  - eosio.msig (code: eosio.msig)
+        //  - eonio.msig (code: eonio.msig)
         //  - eonio.token (code: eonio.token)
-        // set_code_abi(N(eosio.msig), contracts::eosio_msig_wasm(), contracts::eosio_msig_abi().data());//, &eosio_active_pk);
+        // set_code_abi(N(eonio.msig), contracts::eosio_msig_wasm(), contracts::eosio_msig_abi().data());//, &eosio_active_pk);
         // set_code_abi(N(eonio.token), contracts::eosio_token_wasm(), contracts::eosio_token_abi().data()); //, &eosio_active_pk);
 
-        set_code_abi(N(eosio.msig),
+        set_code_abi(N(eonio.msig),
                      contracts::eosio_msig_wasm(),
                      contracts::eosio_msig_abi().data());//, &eosio_active_pk);
         set_code_abi(N(eonio.token),
                      contracts::eosio_token_wasm(),
                      contracts::eosio_token_abi().data()); //, &eosio_active_pk);
 
-        // Set privileged for eosio.msig and eonio.token
-        set_privileged(N(eosio.msig));
+        // Set privileged for eonio.msig and eonio.token
+        set_privileged(N(eonio.msig));
         set_privileged(N(eonio.token));
 
-        // Verify eosio.msig and eonio.token is privileged
-        const auto& eosio_msig_acc = get<account_object, by_name>(N(eosio.msig));
+        // Verify eonio.msig and eonio.token is privileged
+        const auto& eosio_msig_acc = get<account_object, by_name>(N(eonio.msig));
         BOOST_TEST(eosio_msig_acc.privileged == true);
         const auto& eosio_token_acc = get<account_object, by_name>(N(eonio.token));
         BOOST_TEST(eosio_token_acc.privileged == true);
