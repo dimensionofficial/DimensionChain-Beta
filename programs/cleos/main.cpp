@@ -364,7 +364,7 @@ void print_action( const fc::variant& at ) {
    auto console = at["console"].as_string();
 
    /*
-   if( code == "eosio" && func == "setcode" )
+   if( code == "eonio" && func == "setcode" )
       args = args.substr(40)+"...";
    if( name(code) == config::system_account_name && func == "setabi" )
       args = args.substr(40)+"...";
