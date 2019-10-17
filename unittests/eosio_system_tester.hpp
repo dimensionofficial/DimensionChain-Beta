@@ -39,7 +39,7 @@ public:
 
       produce_blocks( 2 );
 
-      create_accounts({ N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake),
+      create_accounts({ N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eonio.stake),
                N(eosio.bpay), N(eosio.vpay), N(eosio.saving), N(eosio.names) });
 
       produce_blocks( 100 );
@@ -79,7 +79,7 @@ public:
       create_account_with_resources( N(bob111111111), config::system_account_name, core_from_string("0.4500"), false );
       create_account_with_resources( N(carol1111111), config::system_account_name, core_from_string("1.0000"), false );
 
-      BOOST_REQUIRE_EQUAL( core_from_string("1000000000.0000"), get_balance("eosio")  + get_balance("eosio.ramfee") + get_balance("eosio.stake") + get_balance("eosio.ram") );
+      BOOST_REQUIRE_EQUAL( core_from_string("1000000000.0000"), get_balance("eosio")  + get_balance("eosio.ramfee") + get_balance("eonio.stake") + get_balance("eosio.ram") );
    }
 
    action_result open( account_name  owner,

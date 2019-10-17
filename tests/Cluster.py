@@ -1071,7 +1071,7 @@ class Cluster(object):
             return None
 
         eosioStakeAccount=copy.deepcopy(eosioAccount)
-        eosioStakeAccount.name="eosio.stake"
+        eosioStakeAccount.name="eonio.stake"
         trans=biosNode.createAccount(eosioStakeAccount, eosioAccount, 0)
         if trans is None:
             Utils.Print("ERROR: Failed to create account %s" % (eosioStakeAccount.name))

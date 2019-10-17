@@ -193,7 +193,7 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
     try {
 
         // Create eonio.msig and eonio.token
-        create_accounts({N(eonio.msig), N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eosio.stake), N(eosio.vpay), N(eosio.bpay), N(eosio.saving) });
+        create_accounts({N(eonio.msig), N(eonio.token), N(eosio.ram), N(eosio.ramfee), N(eonio.stake), N(eosio.vpay), N(eosio.bpay), N(eosio.saving) });
         // Set code for the following accounts:
         //  - eosio (code: eosio.bios) (already set by tester constructor)
         //  - eonio.msig (code: eonio.msig)
@@ -246,7 +246,7 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
            auto r = buyram(config::system_account_name, a.aname, asset(ram));
            BOOST_REQUIRE( !r->except_ptr );
 
-           r = delegate_bandwidth(N(eosio.stake), a.aname, asset(net), asset(cpu));
+           r = delegate_bandwidth(N(eonio.stake), a.aname, asset(net), asset(cpu));
            BOOST_REQUIRE( !r->except_ptr );
         }
 
