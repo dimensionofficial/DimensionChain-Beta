@@ -193,7 +193,7 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
     try {
 
         // Create eonio.msig and eonio.token
-        create_accounts({N(eonio.msig), N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake), N(eosio.vpay), N(eonio.bpay), N(eonio.saving) });
+        create_accounts({N(eonio.msig), N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake), N(eonio.vpay), N(eonio.bpay), N(eonio.saving) });
         // Set code for the following accounts:
         //  - eosio (code: eosio.bios) (already set by tester constructor)
         //  - eonio.msig (code: eonio.msig)

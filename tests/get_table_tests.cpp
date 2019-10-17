@@ -42,7 +42,7 @@ BOOST_FIXTURE_TEST_CASE( get_scope_test, TESTER ) try {
    produce_blocks(2);
 
    create_accounts({ N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake),
-      N(eonio.bpay), N(eosio.vpay), N(eonio.saving), N(eonio.names) });
+      N(eonio.bpay), N(eonio.vpay), N(eonio.saving), N(eonio.names) });
 
    std::vector<account_name> accs{N(inita), N(initb), N(initc), N(initd)};
    create_accounts(accs);
@@ -118,7 +118,7 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
    produce_blocks(2);
 
    create_accounts({ N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake),
-      N(eonio.bpay), N(eosio.vpay), N(eonio.saving), N(eonio.names) });
+      N(eonio.bpay), N(eonio.vpay), N(eonio.saving), N(eonio.names) });
 
    std::vector<account_name> accs{N(inita), N(initb)};
    create_accounts(accs);
@@ -313,7 +313,7 @@ BOOST_FIXTURE_TEST_CASE( get_table_by_seckey_test, TESTER ) try {
    produce_blocks(2);
 
    create_accounts({ N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake),
-      N(eonio.bpay), N(eosio.vpay), N(eonio.saving), N(eonio.names) });
+      N(eonio.bpay), N(eonio.vpay), N(eonio.saving), N(eonio.names) });
 
    std::vector<account_name> accs{N(inita), N(initb), N(initc), N(initd)};
    create_accounts(accs);

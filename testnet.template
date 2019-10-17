@@ -91,7 +91,7 @@ ecmd create account eosio eonio.ramfee $pubsyskey $pubsyskey
 ecmd create account eosio eonio.saving $pubsyskey $pubsyskey
 ecmd create account eosio eonio.stake $pubsyskey $pubsyskey
 ecmd create account eosio eonio.token $pubsyskey $pubsyskey
-ecmd create account eosio eosio.vpay $pubsyskey $pubsyskey
+ecmd create account eosio eonio.vpay $pubsyskey $pubsyskey
 ecmd create account eosio eosio.wrap $pubsyskey $pubsyskey
 
 ecmd set contract eonio.token unittests/contracts/eonio.token eonio.token.wasm eonio.token.abi

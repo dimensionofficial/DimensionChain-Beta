@@ -40,7 +40,7 @@ public:
       produce_blocks( 2 );
 
       create_accounts({ N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake),
-               N(eonio.bpay), N(eosio.vpay), N(eonio.saving), N(eonio.names) });
+               N(eonio.bpay), N(eonio.vpay), N(eonio.saving), N(eonio.names) });
 
       produce_blocks( 100 );
 
