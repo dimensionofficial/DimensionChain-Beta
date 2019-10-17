@@ -333,7 +333,7 @@ def stepSetSystemContract():
     sleep(1)
     run(args.cleos + 'push action eonio setpriv' + jsonArg(['eonio.msig', 1]) + '-p eonio@active')
 def stepInitSystemContract():
-    run(args.cleos + 'push action eonio init' + jsonArg(['0', '4,SYS']) + '-p eonio@active')
+    run(args.cleos + 'push action eonio init' + jsonArg(['0', '4,EON']) + '-p eonio@active')
     sleep(1)
 def stepCreateStakedAccounts():
     createStakedAccounts(0, len(accounts))
@@ -425,7 +425,7 @@ parser.add_argument('--nodes-dir', metavar='', help="Path to nodes directory", d
 parser.add_argument('--genesis', metavar='', help="Path to genesis.json", default="./genesis.json")
 parser.add_argument('--wallet-dir', metavar='', help="Path to wallet directory", default='./wallet/')
 parser.add_argument('--log-path', metavar='', help="Path to log file", default='./output.log')
-parser.add_argument('--symbol', metavar='', help="The eonio.system symbol", default='SYS')
+parser.add_argument('--symbol', metavar='', help="The eonio.system symbol", default='EON')
 parser.add_argument('--user-limit', metavar='', help="Max number of users. (0 = no limit)", type=int, default=50)
 parser.add_argument('--max-user-keys', metavar='', help="Maximum user keys to import into wallet", type=int, default=50)
 parser.add_argument('--ram-funds', metavar='', help="How much funds for each user to spend on ram", type=float, default=0.1)
