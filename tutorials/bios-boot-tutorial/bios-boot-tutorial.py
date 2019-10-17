@@ -134,7 +134,7 @@ def startProducers(b, e):
 
 def createSystemAccounts():
     for a in systemAccounts:
-        run(args.cleos + 'create account eosio ' + a + ' ' + args.public_key)
+        run(args.cleos + 'create account eonio ' + a + ' ' + args.public_key)
 
 def intToCurrency(i):
     return '%d.%04d %s' % (i // 10000, i % 10000, args.symbol)
@@ -173,10 +173,10 @@ def createStakedAccounts(b, e):
         stakeCpu = stake - stakeNet
         print('%s: total funds=%s, ram=%s, net=%s, cpu=%s, unstaked=%s' % (a['name'], intToCurrency(a['funds']), intToCurrency(ramFunds), intToCurrency(stakeNet), intToCurrency(stakeCpu), intToCurrency(unstaked)))
         assert(funds == ramFunds + stakeNet + stakeCpu + unstaked)
-        retry(args.cleos + 'system newaccount --transfer eosio %s %s --stake-net "%s" --stake-cpu "%s" --buy-ram "%s"   ' % 
+        retry(args.cleos + 'system newaccount --transfer eonio %s %s --stake-net "%s" --stake-cpu "%s" --buy-ram "%s"   ' % 
             (a['name'], a['pub'], intToCurrency(stakeNet), intToCurrency(stakeCpu), intToCurrency(ramFunds)))
         if unstaked:
-            retry(args.cleos + 'transfer eosio %s "%s"' % (a['name'], intToCurrency(unstaked)))
+            retry(args.cleos + 'transfer eonio %s "%s"' % (a['name'], intToCurrency(unstaked)))
 
 def regProducers(b, e):
     for i in range(b, e):
@@ -210,10 +210,10 @@ def listProducers():
     run(args.cleos + 'system listproducers')
 
 def listGnodes():
-    run(args.cleos + 'get table eosio eosio gnode')
+    run(args.cleos + 'get table eonio eonio gnode')
 
 def listProposals():
-    run(args.cleos + 'get table eosio eosio proposals')
+    run(args.cleos + 'get table eonio eonio proposals')
 
 def vote(b, e):
     for i in range(b, e):
@@ -243,7 +243,7 @@ def proxyVotes(b, e):
         retry(args.cleos + 'system voteproducer proxy ' + voter + ' ' + proxy)
 
 def updateAuth(account, permission, parent, controller):
-    run(args.cleos + 'push action eosio updateauth' + jsonArg({
+    run(args.cleos + 'push action eonio updateauth' + jsonArg({
         'account': account,
         'permission': permission,
         'parent': parent,
@@ -274,11 +274,11 @@ def msigProposeReplaceSystem(proposer, proposalName):
     requestedPermissions = []
     for i in range(firstProducer, firstProducer + numProducers):
         requestedPermissions.append({'actor': accounts[i]['name'], 'permission': 'active'})
-    trxPermissions = [{'actor': 'eosio', 'permission': 'active'}]
+    trxPermissions = [{'actor': 'eonio', 'permission': 'active'}]
     with open(fastUnstakeSystem, mode='rb') as f:
-        setcode = {'account': 'eosio', 'vmtype': 0, 'vmversion': 0, 'code': f.read().hex()}
+        setcode = {'account': 'eonio', 'vmtype': 0, 'vmversion': 0, 'code': f.read().hex()}
     run(args.cleos + 'multisig propose ' + proposalName + jsonArg(requestedPermissions) + 
-        jsonArg(trxPermissions) + 'eosio setcode' + jsonArg(setcode) + ' -p ' + proposer)
+        jsonArg(trxPermissions) + 'eonio setcode' + jsonArg(setcode) + ' -p ' + proposer)
 
 def msigApproveReplaceSystem(proposer, proposalName):
     for i in range(firstProducer, firstProducer + numProducers):
@@ -290,7 +290,7 @@ def msigExecReplaceSystem(proposer, proposalName):
     retry(args.cleos + 'multisig exec ' + proposer + ' ' + proposalName + ' -p ' + proposer)
 
 def msigReplaceSystem():
-    run(args.cleos + 'push action eosio buyrambytes' + jsonArg(['eosio', accounts[0]['name'], 200000]) + '-p eosio')
+    run(args.cleos + 'push action eonio buyrambytes' + jsonArg(['eonio', accounts[0]['name'], 200000]) + '-p eonio')
     sleep(1)
     msigProposeReplaceSystem(accounts[0]['name'], 'fast.unstake')
     sleep(1)
@@ -315,25 +315,25 @@ def stepStartWallet():
     startWallet()
     importKeys()
 def stepStartBoot():
-    startNode(0, {'name': 'eosio', 'pvt': args.private_key, 'pub': args.public_key})
+    startNode(0, {'name': 'eonio', 'pvt': args.private_key, 'pub': args.public_key})
     sleep(10)
 def stepInstallSystemContracts():
     run(args.cleos + 'set contract eonio.token ' + args.contracts_dir + '/eonio.token/')
     run(args.cleos + 'set contract eonio.msig ' + args.contracts_dir + '/eosio.msig/')
 def stepCreateTokens():
-    run(args.cleos + 'push action eonio.token create \'["eosio", "20000000000.0000 %s"]\' -p eonio.token' % (args.symbol))
+    run(args.cleos + 'push action eonio.token create \'["eonio", "20000000000.0000 %s"]\' -p eonio.token' % (args.symbol))
     totalAllocation = allocateFunds(0, len(accounts)) + 10000000
-    run(args.cleos + 'push action eonio.token issue \'["eosio", "%s", "memo"]\' -p eosio' % intToCurrency(totalAllocation))
+    run(args.cleos + 'push action eonio.token issue \'["eonio", "%s", "memo"]\' -p eonio' % intToCurrency(totalAllocation))
     sleep(1)
 def stepTransferToEosioBlkpay():
-    retry(args.cleos + 'transfer eosio eonio.blkpay "%s"' % intToCurrency(10000000))
+    retry(args.cleos + 'transfer eonio eonio.blkpay "%s"' % intToCurrency(10000000))
     sleep(1)
 def stepSetSystemContract():
-    retry(args.cleos + 'set contract eosio ' + args.contracts_dir + '/eosio.system/')
+    retry(args.cleos + 'set contract eonio ' + args.contracts_dir + '/eosio.system/')
     sleep(1)
-    run(args.cleos + 'push action eosio setpriv' + jsonArg(['eonio.msig', 1]) + '-p eosio@active')
+    run(args.cleos + 'push action eonio setpriv' + jsonArg(['eonio.msig', 1]) + '-p eonio@active')
 def stepInitSystemContract():
-    run(args.cleos + 'push action eosio init' + jsonArg(['0', '4,SYS']) + '-p eosio@active')
+    run(args.cleos + 'push action eonio init' + jsonArg(['0', '4,SYS']) + '-p eonio@active')
     sleep(1)
 def stepCreateStakedAccounts():
     createStakedAccounts(0, len(accounts))
@@ -376,14 +376,14 @@ def stepVote():
 def stepProxyVotes():
     proxyVotes(0, 0 + args.num_voters)
 def stepResign():
-    resign('eosio', 'eonio.prods')
+    resign('eonio', 'eonio.prods')
     for a in systemAccounts:
-        resign(a, 'eosio')
+        resign(a, 'eonio')
 def stepTransfer():
     while True:
         randomTransfer(0, args.num_senders)
 def stepLog():
-    run('tail -n 60 ' + args.nodes_dir + '00-eosio/stderr')
+    run('tail -n 60 ' + args.nodes_dir + '00-eonio/stderr')
 
 # Command Line Arguments
 
