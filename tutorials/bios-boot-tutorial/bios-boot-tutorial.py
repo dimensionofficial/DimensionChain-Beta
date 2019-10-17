@@ -14,7 +14,7 @@ args = None
 logFile = None
 
 unlockTimeout = 999999999
-fastUnstakeSystem = './fast.refund/eosio.system/eosio.system.wasm'
+fastUnstakeSystem = './fast.refund/eonio.system/eonio.system.wasm'
 
 systemAccounts = [
     'eonio.bpay',
@@ -329,7 +329,7 @@ def stepTransferToEosioBlkpay():
     retry(args.cleos + 'transfer eonio eonio.blkpay "%s"' % intToCurrency(10000000))
     sleep(1)
 def stepSetSystemContract():
-    retry(args.cleos + 'set contract eonio ' + args.contracts_dir + '/eosio.system/')
+    retry(args.cleos + 'set contract eonio ' + args.contracts_dir + '/eonio.system/')
     sleep(1)
     run(args.cleos + 'push action eonio setpriv' + jsonArg(['eonio.msig', 1]) + '-p eonio@active')
 def stepInitSystemContract():
