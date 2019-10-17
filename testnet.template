@@ -83,12 +83,12 @@ pubsyskey=`grep "^Public key:" $logfile | tail -1 | sed "s/^Public key://"`
 prisyskey=`grep "^Private key:" $logfile | tail -1 | sed "s/^Private key://"`
 echo eosio.* keys: $prisyskey $pubsyskey >> $logfile
 wcmd import -n ignition --private-key $prisyskey
-ecmd create account eosio eosio.bpay $pubsyskey $pubsyskey
+ecmd create account eosio eonio.bpay $pubsyskey $pubsyskey
 ecmd create account eosio eonio.msig $pubsyskey $pubsyskey
-ecmd create account eosio eosio.names $pubsyskey $pubsyskey
-ecmd create account eosio eosio.ram $pubsyskey $pubsyskey
-ecmd create account eosio eosio.ramfee $pubsyskey $pubsyskey
-ecmd create account eosio eosio.saving $pubsyskey $pubsyskey
+ecmd create account eosio eonio.names $pubsyskey $pubsyskey
+ecmd create account eosio eonio.ram $pubsyskey $pubsyskey
+ecmd create account eosio eonio.ramfee $pubsyskey $pubsyskey
+ecmd create account eosio eonio.saving $pubsyskey $pubsyskey
 ecmd create account eosio eonio.stake $pubsyskey $pubsyskey
 ecmd create account eosio eonio.token $pubsyskey $pubsyskey
 ecmd create account eosio eosio.vpay $pubsyskey $pubsyskey
