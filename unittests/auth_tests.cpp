@@ -324,12 +324,12 @@ try {
                          fc_exception_message_is("account names can only be 12 chars long"));
 
 
-   // Creating account with eosio. prefix with privileged account
-   chain.create_account("eosio.test1");
+   // Creating account with eonio. prefix with privileged account
+   chain.create_account("eonio.test1");
 
-   // Creating account with eosio. prefix with non-privileged account, should fail
-   BOOST_CHECK_EXCEPTION(chain.create_account("eosio.test2", "joe"), action_validate_exception,
-                         fc_exception_message_is("only privileged accounts can have names that start with 'eosio.'"));
+   // Creating account with eonio. prefix with non-privileged account, should fail
+   BOOST_CHECK_EXCEPTION(chain.create_account("eonio.test2", "joe"), action_validate_exception,
+                         fc_exception_message_is("only privileged accounts can have names that start with 'eonio.'"));
 
 } FC_LOG_AND_RETHROW() }
 
@@ -354,10 +354,10 @@ BOOST_AUTO_TEST_CASE( any_auth ) { try {
 
    //test.push_reqauth( N(alice), { permission_level{N(alice),"spending"} }, { spending_priv_key });
 
-   chain.link_authority( "alice", "eonio", "eosio.any", "reqauth" );
-   chain.link_authority( "bob", "eonio", "eosio.any", "reqauth" );
+   chain.link_authority( "alice", "eonio", "eonio.any", "reqauth" );
+   chain.link_authority( "bob", "eonio", "eonio.any", "reqauth" );
 
-   /// this should succeed because eosio::reqauth is linked to any permission
+   /// this should succeed because eonio::reqauth is linked to any permission
    chain.push_reqauth("alice", { permission_level{N(alice), "spending"} }, { spending_priv_key });
 
    /// this should fail because bob cannot authorize for alice, the permission given must be one-of alices
