@@ -319,7 +319,7 @@ def stepStartBoot():
     sleep(10)
 def stepInstallSystemContracts():
     run(args.cleos + 'set contract eonio.token ' + args.contracts_dir + '/eonio.token/')
-    run(args.cleos + 'set contract eonio.msig ' + args.contracts_dir + '/eosio.msig/')
+    run(args.cleos + 'set contract eonio.msig ' + args.contracts_dir + '/eonio.msig/')
 def stepCreateTokens():
     run(args.cleos + 'push action eonio.token create \'["eonio", "20000000000.0000 %s"]\' -p eonio.token' % (args.symbol))
     totalAllocation = allocateFunds(0, len(accounts)) + 10000000
