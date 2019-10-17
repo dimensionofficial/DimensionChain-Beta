@@ -54,13 +54,13 @@ BOOST_FIXTURE_TEST_CASE( get_scope_test, TESTER ) try {
 
    // create currency
    auto act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 SYS"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
 
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("999.0000 SYS") )
                   ("memo", "")
@@ -130,13 +130,13 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
 
    // create currency
    auto act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 SYS"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
 
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("10000.0000 SYS") )
                   ("memo", "")
@@ -146,12 +146,12 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
 
    // create currency 2
    act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 AAA"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("9999.0000 AAA") )
                   ("memo", "")
@@ -161,12 +161,12 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
 
    // create currency 3
    act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 CCC"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("7777.0000 CCC") )
                   ("memo", "")
@@ -176,12 +176,12 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
 
    // create currency 3
    act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 BBB"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("8888.0000 BBB") )
                   ("memo", "")
@@ -230,10 +230,10 @@ BOOST_FIXTURE_TEST_CASE( get_table_test, TESTER ) try {
       BOOST_REQUIRE_EQUAL("8888.0000 BBB", result.rows[2]["data"]["balance"].as_string());
       BOOST_REQUIRE_EQUAL("7777.0000 CCC", result.rows[1]["data"]["balance"].as_string());
       BOOST_REQUIRE_EQUAL("10000.0000 SYS", result.rows[0]["data"]["balance"].as_string());
-      BOOST_REQUIRE_EQUAL("eosio", result.rows[0]["payer"].as_string());
-      BOOST_REQUIRE_EQUAL("eosio", result.rows[1]["payer"].as_string());
-      BOOST_REQUIRE_EQUAL("eosio", result.rows[2]["payer"].as_string());
-      BOOST_REQUIRE_EQUAL("eosio", result.rows[3]["payer"].as_string());
+      BOOST_REQUIRE_EQUAL("eonio", result.rows[0]["payer"].as_string());
+      BOOST_REQUIRE_EQUAL("eonio", result.rows[1]["payer"].as_string());
+      BOOST_REQUIRE_EQUAL("eonio", result.rows[2]["payer"].as_string());
+      BOOST_REQUIRE_EQUAL("eonio", result.rows[3]["payer"].as_string());
    }
    p.show_payer = false;
 
@@ -325,13 +325,13 @@ BOOST_FIXTURE_TEST_CASE( get_table_by_seckey_test, TESTER ) try {
 
    // create currency
    auto act = mutable_variant_object()
-         ("issuer",       "eosio")
+         ("issuer",       "eonio")
          ("maximum_supply", eosio::chain::asset::from_string("1000000000.0000 SYS"));
    push_action(N(eonio.token), N(create), N(eonio.token), act );
 
    // issue
    for (account_name a: accs) {
-      push_action( N(eonio.token), N(issue), "eosio", mutable_variant_object()
+      push_action( N(eonio.token), N(issue), "eonio", mutable_variant_object()
                   ("to",      name(a) )
                   ("quantity", eosio::chain::asset::from_string("10000.0000 SYS") )
                   ("memo", "")
@@ -366,7 +366,7 @@ BOOST_FIXTURE_TEST_CASE( get_table_by_seckey_test, TESTER ) try {
    eosio::chain_apis::read_only plugin(*(this->control), fc::microseconds::maximum());
    eosio::chain_apis::read_only::get_table_rows_params p;
    p.code = N(eosio);
-   p.scope = "eosio";
+   p.scope = "eonio";
    p.table = N(namebids);
    p.json = true;
    p.index_position = "secondary"; // ordered by high_bid

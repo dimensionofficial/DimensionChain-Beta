@@ -74,7 +74,7 @@ class Cluster(object):
         self.defProducerAccounts={}
         self.defproduceraAccount=self.defProducerAccounts["defproducera"]= Account("defproducera")
         self.defproducerbAccount=self.defProducerAccounts["defproducerb"]= Account("defproducerb")
-        self.eosioAccount=self.defProducerAccounts["eosio"]= Account("eosio")
+        self.eosioAccount=self.defProducerAccounts["eonio"]= Account("eonio")
 
         self.defproduceraAccount.ownerPrivateKey=defproduceraPrvtKey
         self.defproduceraAccount.activePrivateKey=defproduceraPrvtKey
@@ -371,7 +371,7 @@ class Cluster(object):
             initAccountKeys(account, producerKeys[name])
             self.defProducerAccounts[name] = account
 
-        self.eosioAccount=self.defProducerAccounts["eosio"]
+        self.eosioAccount=self.defProducerAccounts["eonio"]
         self.defproduceraAccount=self.defProducerAccounts["defproducera"]
         self.defproducerbAccount=self.defProducerAccounts["defproducerb"]
 
@@ -876,7 +876,7 @@ class Cluster(object):
             Utils.Print("ERROR: Failed to create ignition wallet.")
             return None
 
-        eosioName="eosio"
+        eosioName="eonio"
         eosioKeys=producerKeys[eosioName]
         eosioAccount=Account(eosioName)
         eosioAccount.ownerPrivateKey=eosioKeys["private"]
@@ -897,7 +897,7 @@ class Cluster(object):
         for name, keys in producerKeys.items():
             data="{\"from\":\"eosio\",\"to\":\"%s\",\"quantity\":\"%s\",\"memo\":\"%s\"}" % (name, initialFunds, "init eosio transfer")
             opts="--permission eosio@active"
-            if name != "eosio":
+            if name != "eonio":
                 trans=biosNode.pushMessage(contract, action, data, opts)
                 if trans is None or not trans[0]:
                     Utils.Print("ERROR: Failed to transfer funds from eonio.token to %s." % (name))
@@ -947,7 +947,7 @@ class Cluster(object):
 
         ignWallet=walletMgr.create("ignition")
 
-        eosioName="eosio"
+        eosioName="eonio"
         eosioKeys=producerKeys[eosioName]
         eosioAccount=Account(eosioName)
         eosioAccount.ownerPrivateKey=eosioKeys["private"]
@@ -1005,7 +1005,7 @@ class Cluster(object):
 
                     Utils.Print("Setting producers.")
                     opts="--permission eosio@active"
-                    myTrans=biosNode.pushMessage("eosio", "setprods", setProdsStr, opts)
+                    myTrans=biosNode.pushMessage("eonio", "setprods", setProdsStr, opts)
                     if myTrans is None or not myTrans[0]:
                         Utils.Print("ERROR: Failed to set producers.")
                         return None
@@ -1031,7 +1031,7 @@ class Cluster(object):
                 Utils.Print("Setting producers: %s." % (", ".join(prodNames)))
                 opts="--permission eosio@active"
                 # pylint: disable=redefined-variable-type
-                trans=biosNode.pushMessage("eosio", "setprods", setProdsStr, opts)
+                trans=biosNode.pushMessage("eonio", "setprods", setProdsStr, opts)
                 if trans is None or not trans[0]:
                     Utils.Print("ERROR: Failed to set producer %s." % (keys["name"]))
                     return None
@@ -1043,7 +1043,7 @@ class Cluster(object):
                 return None
 
             # wait for block production handover (essentially a block produced by anyone but eosio).
-            lam = lambda: biosNode.getInfo(exitOnError=True)["head_block_producer"] != "eosio"
+            lam = lambda: biosNode.getInfo(exitOnError=True)["head_block_producer"] != "eonio"
             ret=Utils.waitForBool(lam)
             if not ret:
                 Utils.Print("ERROR: Block production handover failed.")
