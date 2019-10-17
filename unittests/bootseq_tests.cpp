@@ -195,7 +195,7 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
         // Create eonio.msig and eonio.token
         create_accounts({N(eonio.msig), N(eonio.token), N(eonio.ram), N(eonio.ramfee), N(eonio.stake), N(eonio.vpay), N(eonio.bpay), N(eonio.saving) });
         // Set code for the following accounts:
-        //  - eosio (code: eosio.bios) (already set by tester constructor)
+        //  - eosio (code: eonio.bios) (already set by tester constructor)
         //  - eonio.msig (code: eonio.msig)
         //  - eonio.token (code: eonio.token)
         // set_code_abi(N(eonio.msig), contracts::eosio_msig_wasm(), contracts::eosio_msig_abi().data());//, &eosio_active_pk);
@@ -223,7 +223,7 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
         auto max_supply = core_from_string("10000000000.0000"); /// 1x larger than 1B initial tokens
         auto initial_supply = core_from_string("1000000000.0000"); /// 1x larger than 1B initial tokens
         create_currency(N(eonio.token), config::system_account_name, max_supply);
-        // Issue the genesis supply of 1 billion SYS tokens to eosio.system
+        // Issue the genesis supply of 1 billion SYS tokens to eonio.system
         issue(N(eonio.token), config::system_account_name, config::system_account_name, initial_supply);
 
         auto actual = get_balance(config::system_account_name);
