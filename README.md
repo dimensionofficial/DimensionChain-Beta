@@ -28,11 +28,6 @@ There is no public testnet running currently.
 
 **If you have previously installed EOSIO, please run the `eosio_uninstall` script (it is in the directory where you cloned EOSIO) before downloading and using the binary releases.**
 
-#### Mac OS X Brew Install
-```sh
-$ brew tap eosio/eosio
-$ brew install eosio
-```
 
 #### Ubuntu 18.04 Debian Package Install
 ```sh
