@@ -69,14 +69,14 @@ EOSIO currently supports the following operating systems:
 7. MacOS Darwin 10.12 and higher (MacOS 10.13.x recommended)
 
 ## Resources
-1. [Website](https://eos.io)
-1. [Blog](https://medium.com/eosio)
-1. [Developer Portal](https://developers.eos.io)
-1. [StackExchange for Q&A](https://eosio.stackexchange.com/)
-1. [Community Telegram Group](https://t.me/EOSProject)
-1. [Developer Telegram Group](https://t.me/joinchat/EaEnSUPktgfoI-XPfMYtcQ)
-1. [White Paper](https://github.com/EOSIO/Documentation/blob/master/TechnicalWhitePaper.md)
-1. [Roadmap](https://github.com/EOSIO/Documentation/blob/master/Roadmap.md)
+1. [Website](https://github.com/dimensionofficial/dimension)
+1. [Blog](https://github.com/dimensionofficial/dimension)
+1. [Developer Portal](https://github.com/dimensionofficial/dimension)
+1. [StackExchange for Q&A](https://github.com/dimensionofficial/dimension)
+1. [Community Telegram Group](https://github.com/dimensionofficial/dimension)
+1. [Developer Telegram Group](https://github.com/dimensionofficial/dimension)
+1. [White Paper](https://github.com/dimensionofficial/dimension)
+1. [Roadmap](https://github.com/dimensionofficial/dimension)
 
 <a name="gettingstarted"></a>
 ## Getting Started
