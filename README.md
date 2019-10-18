@@ -33,10 +33,7 @@ There is no public testnet running currently.
 $ brew tap eosio/eosio
 $ brew install eosio
 ```
-#### Mac OS X Brew Uninstall
-```sh
-$ brew remove eosio
-```
+
 #### Ubuntu 18.04 Debian Package Install
 ```sh
 $ wget https://github.com/eosio/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-18.04_amd64.deb
