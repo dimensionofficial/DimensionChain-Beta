@@ -56,7 +56,7 @@ wcmd () {
 }
 
 cacmd () {
-    programs/cleos/cleos  --wallet-url $wdurl --url http://$bioshost:$biosport system newaccount --transfer --stake-net "10000000.0000 EON" --stake-cpu "10000000.0000 EON"  --buy-ram "10000000.0000 EON" eosio $* >> $logfile 2>&1
+    programs/cleos/cleos  --wallet-url $wdurl --url http://$bioshost:$biosport system newaccount --transfer --stake-net "10000000.0000 EON" --stake-cpu "10000000.0000 EON"  --buy-ram "10000000.0000 EON" eonio $* >> $logfile 2>&1
     ecmd system regproducer $1 $2
     ecmd system voteproducer prods $1 $1
 }
@@ -75,24 +75,24 @@ wcmd create --to-console -n ignition
 # ------ DO NOT ALTER THE NEXT LINE -------
 ###INSERT prodkeys
 
-ecmd set contract eosio unittests/contracts/eonio.bios eonio.bios.wasm eonio.bios.abi
+ecmd set contract eonio unittests/contracts/eonio.bios eonio.bios.wasm eonio.bios.abi
 
 # Create required system accounts
 ecmd create key --to-console
 pubsyskey=`grep "^Public key:" $logfile | tail -1 | sed "s/^Public key://"`
 prisyskey=`grep "^Private key:" $logfile | tail -1 | sed "s/^Private key://"`
-echo eosio.* keys: $prisyskey $pubsyskey >> $logfile
+echo eonio.* keys: $prisyskey $pubsyskey >> $logfile
 wcmd import -n ignition --private-key $prisyskey
-ecmd create account eosio eonio.bpay $pubsyskey $pubsyskey
-ecmd create account eosio eonio.msig $pubsyskey $pubsyskey
-ecmd create account eosio eonio.names $pubsyskey $pubsyskey
-ecmd create account eosio eonio.ram $pubsyskey $pubsyskey
-ecmd create account eosio eonio.ramfee $pubsyskey $pubsyskey
-ecmd create account eosio eonio.saving $pubsyskey $pubsyskey
-ecmd create account eosio eonio.stake $pubsyskey $pubsyskey
-ecmd create account eosio eonio.token $pubsyskey $pubsyskey
-ecmd create account eosio eonio.vpay $pubsyskey $pubsyskey
-ecmd create account eosio eonio.wrap $pubsyskey $pubsyskey
+ecmd create account eonio eonio.bpay $pubsyskey $pubsyskey
+ecmd create account eonio eonio.msig $pubsyskey $pubsyskey
+ecmd create account eonio eonio.names $pubsyskey $pubsyskey
+ecmd create account eonio eonio.ram $pubsyskey $pubsyskey
+ecmd create account eonio eonio.ramfee $pubsyskey $pubsyskey
+ecmd create account eonio eonio.saving $pubsyskey $pubsyskey
+ecmd create account eonio eonio.stake $pubsyskey $pubsyskey
+ecmd create account eonio eonio.token $pubsyskey $pubsyskey
+ecmd create account eonio eonio.vpay $pubsyskey $pubsyskey
+ecmd create account eonio eonio.wrap $pubsyskey $pubsyskey
 
 ecmd set contract eonio.token unittests/contracts/eonio.token eonio.token.wasm eonio.token.abi
 ecmd set contract eonio.msig unittests/contracts/eonio.msig eonio.msig.wasm eonio.msig.abi
@@ -100,15 +100,15 @@ ecmd set contract eonio.wrap unittests/contracts/eonio.wrap eonio.wrap.wasm eoni
 
 echo ===== Start: $step ============ >> $logfile
 echo executing: cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token create '[ "eonio", "10000000000.0000 EON" ]' -p eonio.token | tee -a $logfile
-echo executing: cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token issue '[ "eonio", "1000000000.0000 EON", "memo" ]' -p eosio | tee -a $logfile
+echo executing: cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token issue '[ "eonio", "1000000000.0000 EON", "memo" ]' -p eonio | tee -a $logfile
 echo ----------------------- >> $logfile
 programs/cleos/cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token create '[ "eonio", "10000000000.0000 EON" ]' -p eonio.token >> $logfile 2>&1
-programs/cleos/cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token issue '[ "eonio", "1000000000.0000 EON", "memo" ]' -p eosio >> $logfile 2>&1
+programs/cleos/cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio.token issue '[ "eonio", "1000000000.0000 EON", "memo" ]' -p eonio >> $logfile 2>&1
 echo ==== End: $step ============== >> $logfile
 step=$(($step + 1))
 
-ecmd set contract eosio unittests/contracts/eonio.system eonio.system.wasm eonio.system.abi
-programs/cleos/cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eosio init '[0, "4,EON"]' -p eosio >> $logfile 2>&1
+ecmd set contract eonio unittests/contracts/eonio.system eonio.system.wasm eonio.system.abi
+programs/cleos/cleos --wallet-url $wdurl --url http://$bioshost:$biosport push action eonio init '[0, "4,EON"]' -p eonio >> $logfile 2>&1
 
 # Manual deployers, add a series of lines below this block that looks like:
 #    cacmd $PRODNAME[0] $OWNERKEY[0] $ACTIVEKEY[0]
