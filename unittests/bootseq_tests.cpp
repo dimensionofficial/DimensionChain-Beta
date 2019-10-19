@@ -219,11 +219,11 @@ BOOST_FIXTURE_TEST_CASE( bootseq_test, bootseq_tester ) {
         BOOST_TEST(eosio_token_acc.privileged == true);
 
 
-        // Create SYS tokens in eonio.token, set its manager as eosio
+        // Create EON tokens in eonio.token, set its manager as eosio
         auto max_supply = core_from_string("10000000000.0000"); /// 1x larger than 1B initial tokens
         auto initial_supply = core_from_string("1000000000.0000"); /// 1x larger than 1B initial tokens
         create_currency(N(eonio.token), config::system_account_name, max_supply);
-        // Issue the genesis supply of 1 billion SYS tokens to eonio.system
+        // Issue the genesis supply of 1 billion EON tokens to eonio.system
         issue(N(eonio.token), config::system_account_name, config::system_account_name, initial_supply);
 
         auto actual = get_balance(config::system_account_name);
