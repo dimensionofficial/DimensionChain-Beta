@@ -112,6 +112,7 @@ def startNode(nodeIndex, account):
         '    --config-dir ' + os.path.abspath(dir) +
         '    --data-dir ' + os.path.abspath(dir) +
         '    --chain-state-db-size-mb 1024'
+        '    --http-validate-host false'
         '    --access-control-allow-origin \'*\''
         '    --http-server-address 0.0.0.0:' + str(8000 + nodeIndex) +
         '    --p2p-listen-endpoint 0.0.0.0:' + str(9000 + nodeIndex) +
