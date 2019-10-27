@@ -1,6 +1,6 @@
 # Bios Boot Tutorial
 
-The `bios-boot-tutorial.py` script simulates the EOSIO bios boot sequence.
+The `bios-boot-tutorial.py` script simulates the dimension bios boot sequence.
 
 ``Prerequisites``:
 
