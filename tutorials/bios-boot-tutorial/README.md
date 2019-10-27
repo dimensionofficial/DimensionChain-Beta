@@ -11,7 +11,7 @@ The `bios-boot-tutorial.py` script simulates the dimension bios boot sequence.
 ``Steps``:
 
 1. Install dimension binaries by following the steps outlined in below tutorial
-[Install eosio binaries](https://github.com/EOSIO/dimension#mac-os-x-brew-install)
+[Install dimension binaries](https://github.com/EOSIO/dimension#mac-os-x-brew-install)
 
 2. Install eosio.cdt binaries by following the steps outlined in below tutorial
 [Install eosio.cdt binaries](https://github.com/EOSIO/eosio.cdt#binary-releases)
