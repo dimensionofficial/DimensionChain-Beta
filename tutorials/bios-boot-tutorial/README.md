@@ -20,7 +20,7 @@ The `bios-boot-tutorial.py` script simulates the dimension bios boot sequence.
 
 ```bash
 $ cd ~
-$ git clone https://github.com/EOSIO/eosio.contracts.git
+$ git clone https://github.com/EOSIO/dimension.contracts.git
 $ cd ./dimension.contracts/
 $ ./build.sh
 $ pwd
