@@ -16,7 +16,7 @@ The `bios-boot-tutorial.py` script simulates the dimension bios boot sequence.
 2. Install eosio.cdt binaries by following the steps outlined in below tutorial
 [Install eosio.cdt binaries](https://github.com/EOSIO/eosio.cdt#binary-releases)
 
-3. Compile eosio.contracts
+3. Compile dimension.contracts
 
 ```bash
 $ cd ~
