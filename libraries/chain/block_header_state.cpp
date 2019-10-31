@@ -197,8 +197,9 @@ namespace eosio { namespace chain {
      uint32_t blocks_to_confirm = num_prev_blocks + 1; /// confirm the head block too
      while( i >= 0 && blocks_to_confirm ) {
         --confirm_count[i];
-        if(false) {
-          
+        
+        if(confirm_count[i] != 0 && false) {
+          --confirm_count[i];
         }
         //idump((confirm_count[i]));
         if( confirm_count[i] == 0 )
