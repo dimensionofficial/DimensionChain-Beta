@@ -48,7 +48,7 @@ $ sudo apt remove dimension
 #### Centos RPM Package Install
 ```sh
 $ wget https://github.com/dimension/dimension/releases/download/v1.7.0/dimension-1.7.0-1.el7.x86_64.rpm
-$ sudo yum install ./eosio-1.7.0-1.el7.x86_64.rpm
+$ sudo yum install ./dimension-1.7.0-1.el7.x86_64.rpm
 ```
 #### Centos RPM Package Uninstall
 ```sh
