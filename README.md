@@ -43,7 +43,7 @@ $ sudo apt install ./eosio_1.7.0-1-ubuntu-16.04_amd64.deb
 ```
 #### Debian Package Uninstall
 ```sh
-$ sudo apt remove eosio
+$ sudo apt remove dimension
 ```
 #### Centos RPM Package Install
 ```sh
