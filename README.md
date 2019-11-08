@@ -38,7 +38,7 @@ $ sudo apt install ./eosio_1.7.0-1-ubuntu-18.04_amd64.deb
 ```
 #### Ubuntu 16.04 Debian Package Install
 ```sh
-$ wget https://github.com/eosio/eos/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-16.04_amd64.deb
+$ wget https://github.com/eosio/dimension/releases/download/v1.7.0/eosio_1.7.0-1-ubuntu-16.04_amd64.deb
 $ sudo apt install ./eosio_1.7.0-1-ubuntu-16.04_amd64.deb
 ```
 #### Debian Package Uninstall
