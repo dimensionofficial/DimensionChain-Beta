@@ -82,4 +82,4 @@ Dimension currently supports the following operating systems:
 
 <a name="gettingstarted"></a>
 ## Getting Started
-Instructions detailing the process of getting the software, building it, running a simple test network that produces blocks, account creation and uploading a sample contract to the blockchain can be found in [Getting Started](https://developers.dimension.io/eosio-home/docs) on the [Dimension Developer Portal](https://developers.dimension.io).
+Instructions detailing the process of getting the software, building it, running a simple test network that produces blocks, account creation and uploading a sample contract to the blockchain can be found in [Getting Started](https://developers.dimension.io/dimension-home/docs) on the [Dimension Developer Portal](https://developers.dimension.io).
