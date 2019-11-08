@@ -70,7 +70,6 @@ Dimension currently supports the following operating systems:
 6. Ubuntu 18.04
 7. MacOS Darwin 10.12 and higher (MacOS 10.13.x recommended)
 
-
 ## Resources
 1. [Website](https://github.com/dimensionofficial/dimension)
 1. [Blog](https://github.com/dimensionofficial/dimension)
