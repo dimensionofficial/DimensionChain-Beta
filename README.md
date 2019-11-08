@@ -5,7 +5,7 @@
 
 Welcome to the Dimension source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
 
-Some of the groundbreaking features of Dimension include:
+Some of the groundbreaking features of dimension include:
 
 1. Free Rate Limited Transactions
 1. Low Latency Block confirmation (0.5 seconds)
