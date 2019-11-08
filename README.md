@@ -1,7 +1,7 @@
 
 # Dimension - The Most Powerful Infrastructure for Decentralized Applications
 
-[![Build status](https://badge.buildkite.com/370fe5c79410f7d695e4e34c500b4e86e3ac021c6b1f739e20.svg?branch=master)](https://buildkite.com/Dimension/eosio)
+[![Build status](https://badge.buildkite.com/370fe5c79410f7d695e4e34c500b4e86e3ac021c6b1f739e20.svg?branch=master)](https://buildkite.com/Dimension/dimension)
 
 Welcome to the Dimension source code repository! This software enables businesses to rapidly build and deploy high-performance and high-security blockchain-based applications.
 
@@ -26,7 +26,9 @@ Block.one is neither launching nor operating any initial public blockchains base
 
 There is no public testnet running currently.
 
-**If you have previously installed Dimension, please run the `eosio_uninstall` script (it is in the directory where you cloned Dimension) before downloading and using the binary releases.**
+**If you have previously installed Dimension, please run the `
+
+io_uninstall` script (it is in the directory where you cloned Dimension) before downloading and using the binary releases.**
 
 
 #### Ubuntu 18.04 Debian Package Install
