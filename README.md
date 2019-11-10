@@ -57,7 +57,7 @@ $ sudo yum remove dimension.cdt
 
 #### Fedora RPM Package Uninstall
 ```sh
-$ sudo yum remove dimension.cdt
+$ sudo yum remove eosio.cdt
 ```
 
 ## Supported Operating Systems
