@@ -52,7 +52,7 @@ $ sudo yum install ./dimension-1.7.0-1.el7.x86_64.rpm
 ```
 #### Centos RPM Package Uninstall
 ```sh
-$ sudo yum remove dimension.cdt
+$ sudo yum remove eosio.cdt
 ```
 
 #### Fedora RPM Package Uninstall
