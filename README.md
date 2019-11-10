@@ -38,7 +38,7 @@ $ sudo apt install ./dimension_1.7.0-1-ubuntu-18.04_amd64.deb
 ```
 #### Ubuntu 16.04 Debian Package Install
 ```sh
-$ wget https://github.com/dimension/dimension/releases/download/v1.7.0/dimension_1.7.0-1-ubuntu-16.04_amd64.deb
+$ wget https://github.com/dimensionofficial/dimension/releases/download/v1.7.0/dimension_1.7.0-1-ubuntu-16.04_amd64.deb
 $ sudo apt install ./dimension_1.7.0-1-ubuntu-16.04_amd64.deb
 ```
 #### Debian Package Uninstall
