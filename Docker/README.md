@@ -49,7 +49,7 @@ $ docker volume rm fdc265730a4f697346fa8b078c176e315b959e79365fc9cbd11f090ea0cb5
 Alternately, you can directly mount host directory into the container
 
 ```bash
-docker run --name nodeon -v /path-to-data-dir:/opt/eonio/bin/data-dir -p 8888:8888 -p 9876:9876 -t eonio/eos nodeosd.sh -e --http-alias=nodeon:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 arg1 arg2
+docker run --name nodeon -v /path-to-data-dir:/opt/eonio/bin/data-dir -p 8888:8888 -p 9876:9876 -t eonio/eon nodeosd.sh -e --http-alias=nodeon:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 arg1 arg2
 ```
 
 ## Get chain info
