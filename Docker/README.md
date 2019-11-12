@@ -98,7 +98,7 @@ You can either use the image available on [Docker Hub](https://hub.docker.com/r/
 
 ```bash
 cd dev
-docker build -t eosio/eos-dev .
+docker build -t eonio/eos-dev .
 ```
 
 ### Change default configuration
