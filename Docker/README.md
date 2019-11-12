@@ -58,7 +58,7 @@ docker run --name nodeon -v /path-to-data-dir:/opt/eonio/bin/data-dir -p 8888:88
 curl http://127.0.0.1:8888/v1/chain/get_info
 ```
 
-## Start both nodeos and keond containers
+## Start both nodeon and keond containers
 
 ```bash
 docker volume create --name=nodeon-data-volume
