@@ -62,7 +62,7 @@ curl http://127.0.0.1:8888/v1/chain/get_info
 
 ```bash
 docker volume create --name=nodeon-data-volume
-docker volume create --name=keosd-data-volume
+docker volume create --name=keond-data-volume
 docker-compose up -d
 ```
 
