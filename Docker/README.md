@@ -152,7 +152,7 @@ curl http://127.0.0.1:8888/v1/chain/get_info
 # get logs
 docker-compose logs -f nodeosd
 # stop containers
-docker-compose -f docker-compose-eosio-latest.yaml down
+docker-compose -f docker-compose-eonio-latest.yaml down
 ```
 
 The `blocks` data are stored under `--data-dir` by default, and the wallet files are stored under `--wallet-dir` by default, of course you can change these as you want.
