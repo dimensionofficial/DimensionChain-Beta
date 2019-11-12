@@ -143,7 +143,7 @@ Note: if you want to use the mongo db plugin, you have to enable it in your `dat
 
 ```
 # create volume
-docker volume create --name=nodeos-data-volume
+docker volume create --name=nodeon-data-volume
 docker volume create --name=keosd-data-volume
 # pull images and start containers
 docker-compose -f docker-compose-eosio-latest.yaml up -d
