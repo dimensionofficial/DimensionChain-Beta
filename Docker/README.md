@@ -66,7 +66,7 @@ docker volume create --name=keosd-data-volume
 docker-compose up -d
 ```
 
-After `docker-compose up -d`, two services named `nodeosd` and `keond` will be started. nodeos service would expose ports 8888 and 9876 to the host. keosd service does not expose any port to the host, it is only accessible to cleos when running cleos is running inside the keosd container as described in "Execute cleos commands" section.
+After `docker-compose up -d`, two services named `nodeond` and `keond` will be started. nodeos service would expose ports 8888 and 9876 to the host. keosd service does not expose any port to the host, it is only accessible to cleos when running cleos is running inside the keosd container as described in "Execute cleos commands" section.
 
 ### Execute cleos commands
 
