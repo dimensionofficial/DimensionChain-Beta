@@ -17,7 +17,7 @@ Simple and fast setup of dimension on Docker is also available.
 ```bash
 git clone https://github.com/dimensionofficial/dimension.git --recursive  --depth 1
 cd dimension/Docker
-docker build . -t eosio/dimension
+docker build . -t dimension/dimension
 ```
 
 The above will build off the most recent commit to the master branch by default. If you would like to target a specific branch/tag, you may use a build argument. For example, if you wished to generate a docker image based off of the v1.7.0 tag, you could do the following:
