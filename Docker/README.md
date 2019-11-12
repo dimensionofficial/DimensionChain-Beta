@@ -41,7 +41,7 @@ docker run --name nodeon -p 8888:8888 -p 9876:9876 -t eonio/eon nodeond.sh -e --
 By default, all data is persisted in a docker volume. It can be deleted if the data is outdated or corrupted:
 
 ```bash
-$ docker inspect --format '{{ range .Mounts }}{{ .Name }} {{ end }}' nodeos
+$ docker inspect --format '{{ range .Mounts }}{{ .Name }} {{ end }}' nodeon
 fdc265730a4f697346fa8b078c176e315b959e79365fc9cbd11f090ea0cb5cbc
 $ docker volume rm fdc265730a4f697346fa8b078c176e315b959e79365fc9cbd11f090ea0cb5cbc
 ```
