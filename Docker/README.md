@@ -109,7 +109,7 @@ You can use docker compose override file to change the default configurations. F
 version: "2"
 
 services:
-  nodeos:
+  nodeon:
     volumes:
       - nodeos-data-volume:/opt/eonio/bin/data-dir
       - ./config2.ini:/opt/eosio/bin/data-dir/config.ini
