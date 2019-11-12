@@ -87,7 +87,7 @@ cleos set contract exchange contracts/exchange/
 If you don't need keosd afterwards, you can stop the keosd service using
 
 ```bash
-docker-compose stop keosd
+docker-compose stop keond
 ```
 
 ### Develop/Build custom contracts
