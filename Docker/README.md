@@ -92,7 +92,7 @@ docker-compose stop keond
 
 ### Develop/Build custom contracts
 
-Due to the fact that the eosio/eos image does not contain the required dependencies for contract development (this is by design, to keep the image size small), you will need to utilize the eosio/eos-dev image. This image contains both the required binaries and dependencies to build contracts using eosiocpp.
+Due to the fact that the eosio/dimension image does not contain the required dependencies for contract development (this is by design, to keep the image size small), you will need to utilize the eosio/eos-dev image. This image contains both the required binaries and dependencies to build contracts using eosiocpp.
 
 You can either use the image available on [Docker Hub](https://hub.docker.com/r/eonio/eos-dev/) or navigate into the dev folder and build the image manually.
 
