@@ -139,6 +139,7 @@ Docker Hub images are now deprecated. New build images were discontinued on Janu
 
 ### dimension Testnet
 
+
 We can easily set up a dimension local testnet using docker images. Just run the following commands:
 
 Note: if you want to use the mongo db plugin, you have to enable it in your `data-dir/config.ini` first.
