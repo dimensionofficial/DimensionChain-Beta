@@ -111,7 +111,7 @@ version: "2"
 services:
   nodeon:
     volumes:
-      - nodeos-data-volume:/opt/eonio/bin/data-dir
+      - nodeon-data-volume:/opt/eonio/bin/data-dir
       - ./config2.ini:/opt/eosio/bin/data-dir/config.ini
 ```
 
