@@ -123,6 +123,7 @@ docker-compose down
 docker-compose up
 ```
 
+
 ### Clear data-dir
 
 The data volume created by docker-compose can be deleted as follows:
