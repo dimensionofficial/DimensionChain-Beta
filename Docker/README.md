@@ -90,7 +90,6 @@ If you don't need keond afterwards, you can stop the keond service using
 docker-compose stop keond
 ```
 
-
 ### Develop/Build custom contracts
 
 Due to the fact that the eonio/dimension image does not contain the required dependencies for contract development (this is by design, to keep the image size small), you will need to utilize the eonio/eon-dev image. This image contains both the required binaries and dependencies to build contracts using eoniocpp.
