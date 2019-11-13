@@ -73,7 +73,7 @@ After `docker-compose up -d`, two services named `nodeond` and `keond` will be s
 You can run the `cleon` commands via a bash alias.
 
 ```bash
-alias cleos='docker-compose exec keosd /opt/dimension/bin/cleos -u http://nodeond:8888 --wallet-url http://localhost:8900'
+alias cleon='docker-compose exec keosd /opt/dimension/bin/cleos -u http://nodeond:8888 --wallet-url http://localhost:8900'
 cleos get info
 cleos get account inita
 ```
