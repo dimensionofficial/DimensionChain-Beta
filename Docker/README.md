@@ -84,7 +84,7 @@ Upload sample exchange contract
 cleon set contract exchange contracts/exchange/
 ```
 
-If you don't need keosd afterwards, you can stop the keond service using
+If you don't need keond afterwards, you can stop the keond service using
 
 ```bash
 docker-compose stop keond
