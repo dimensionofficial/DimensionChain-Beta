@@ -75,7 +75,7 @@ You can run the `cleon` commands via a bash alias.
 ```bash
 alias cleon='docker-compose exec keosd /opt/dimension/bin/cleon -u http://nodeond:8888 --wallet-url http://localhost:8900'
 cleon get info
-cleos get account inita
+cleon get account inita
 ```
 
 Upload sample exchange contract
