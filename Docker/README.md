@@ -150,7 +150,7 @@ docker-compose -f docker-compose-eosio-latest.yaml up -d
 # get chain info
 curl http://127.0.0.1:8888/v1/chain/get_info
 # get logs
-docker-compose logs -f nodeosd
+docker-compose logs -f nodeond
 # stop containers
 docker-compose -f docker-compose-eonio-latest.yaml down
 ```
