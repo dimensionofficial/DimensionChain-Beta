@@ -128,7 +128,7 @@ The data volume created by docker-compose can be deleted as follows:
 
 ```bash
 docker volume rm nodeon-data-volume
-docker volume rm keosd-data-volume
+docker volume rm keond-data-volume
 ```
 
 ### Docker Hub
