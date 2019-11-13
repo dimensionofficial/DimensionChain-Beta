@@ -112,7 +112,7 @@ services:
   nodeon:
     volumes:
       - nodeon-data-volume:/opt/eonio/bin/data-dir
-      - ./config2.ini:/opt/eosio/bin/data-dir/config.ini
+      - ./config2.ini:/opt/eonio/bin/data-dir/config.ini
 ```
 
 Then restart your docker containers as follows:
