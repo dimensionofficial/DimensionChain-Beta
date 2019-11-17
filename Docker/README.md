@@ -100,6 +100,7 @@ Due to the fact that the eonio/dimension image does not contain the required dep
 
 You can either use the image available on [Docker Hub](https://hub.docker.com/r/eonio/eon-dev/) or navigate into the dev folder and build the image manually.
 
+
 ```bash
 cd dev
 docker build -t eonio/eon-dev .
