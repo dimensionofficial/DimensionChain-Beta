@@ -12,6 +12,7 @@ Simple and fast setup of dimension on Docker is also available.
 - At least 7GB RAM (Docker -> Preferences -> Advanced -> Memory -> 7GB or above)
 - If the build below fails, make sure you've adjusted Docker Memory settings and try again.
 
+
 ## Build dimension image
 
 ```bash
