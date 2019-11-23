@@ -27,7 +27,6 @@ The above will build off the most recent commit to the master branch by default.
 docker build -t eonio/dimension:v1.7.0 --build-arg branch=v1.7.0 .
 ```
 
-
 By default, the symbol in eonio.system is set to EON. You can override this using the symbol argument while building the docker image.
 
 ```bash
