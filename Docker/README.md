@@ -46,7 +46,6 @@ fdc265730a4f697346fa8b078c176e315b959e79365fc9cbd11f090ea0cb5cbc
 $ docker volume rm fdc265730a4f697346fa8b078c176e315b959e79365fc9cbd11f090ea0cb5cbc
 ```
 
-
 Alternately, you can directly mount host directory into the container
 
 ```bash
