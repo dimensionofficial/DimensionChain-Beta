@@ -7,7 +7,6 @@ Simple and fast setup of dimension on Docker is also available.
 - [Docker](https://docs.docker.com) Docker 17.05 or higher is required
 - [docker-compose](https://docs.docker.com/compose/) version >= 1.10.0
 
-
 ## Docker Requirement
 
 - At least 7GB RAM (Docker -> Preferences -> Advanced -> Memory -> 7GB or above)
