@@ -35,6 +35,7 @@ docker build -t dimension/dimension --build-arg symbol=<symbol> .
 
 ## Start nodeon docker container only
 
+
 ```bash
 docker run --name nodeon -p 8888:8888 -p 9876:9876 -t eonio/eon nodeond.sh -e --http-alias=nodeon:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 arg1 arg2
 ```
