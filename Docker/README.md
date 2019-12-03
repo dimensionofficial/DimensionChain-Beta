@@ -5,6 +5,7 @@ Simple and fast setup of dimension on Docker is also available.
 ## Install Dependencies
 
 
+
 - [Docker](https://docs.docker.com) Docker 17.05 or higher is required
 - [docker-compose](https://docs.docker.com/compose/) version >= 1.10.0
 
@@ -94,76 +95,4 @@ docker-compose stop keond
 
 ### Develop/Build custom contracts
 
-Due to the fact that the eonio/dimension image does not contain the required dependencies for contract development (this is by design, to keep the image size small), you will need to utilize the eonio/eon-dev image. This image contains both the required binaries and dependencies to build contracts using eoniocpp.
-
-
-You can either use the image available on [Docker Hub](https://hub.docker.com/r/eonio/eon-dev/) or navigate into the dev folder and build the image manually.
-
-
-```bash
-cd dev
-docker build -t eonio/eon-dev .
-```
-
-### Change default configuration
-
-You can use docker compose override file to change the default configurations. For example, create an alternate config file `config2.ini` and a `docker-compose.override.yml` with the following content.
-
-```yaml
-version: "2"
-
-services:
-  nodeon:
-    volumes:
-      - nodeon-data-volume:/opt/eonio/bin/data-dir
-      - ./config2.ini:/opt/eonio/bin/data-dir/config.ini
-```
-
-Then restart your docker containers as follows:
-
-```bash
-docker-compose down
-docker-compose up
-```
-
-
-### Clear data-dir
-
-The data volume created by docker-compose can be deleted as follows:
-
-```bash
-docker volume rm nodeon-data-volume
-docker volume rm keond-data-volume
-```
-
-### Docker Hub
-
-Docker Hub images are now deprecated. New build images were discontinued on January 1st, 2019. The existing old images will be removed on June 1st, 2019.
-
-### dimension Testnet
-
-
-We can easily set up a dimension local testnet using docker images. Just run the following commands:
-
-Note: if you want to use the mongo db plugin, you have to enable it in your `data-dir/config.ini` first.
-
-
-```
-# create volume
-docker volume create --name=nodeon-data-volume
-docker volume create --name=keond-data-volume
-# pull images and start containers
-docker-compose -f docker-compose-eonio-latest.yaml up -d
-# get chain info
-curl http://127.0.0.1:8888/v1/chain/get_info
-# get logs
-docker-compose logs -f nodeond
-# stop containers
-docker-compose -f docker-compose-eonio-latest.yaml down
-```
-
-The `blocks` data are stored under `--data-dir` by default, and the wallet files are stored under `--wallet-dir` by default, of course you can change these as you want.
-
-### About MongoDB Plugin
-
-Currently, the mongodb plugin is disabled in `config.ini` by default, you have to change it manually in `config.ini` or you can mount a `config.ini` file to `/opt/eonio/bin/data-dir/config.ini` in the docker-compose file.
+Due to the fact that the eonio/dimension image does not contain the required dependencies
