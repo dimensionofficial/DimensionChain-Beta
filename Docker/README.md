@@ -15,7 +15,6 @@ Simple and fast setup of dimension on Docker is also available.
 ## Build dimension image
 
 
-
 ```bash
 git clone https://github.com/dimensionofficial/dimension.git --recursive  --depth 1
 cd dimension/Docker
