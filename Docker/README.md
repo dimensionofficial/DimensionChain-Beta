@@ -33,7 +33,6 @@ By default, the symbol in eonio.system is set to EON. You can override this usin
 docker build -t dimension/dimension --build-arg symbol=<symbol> .
 ```
 
-
 ## Start nodeon docker container only
 
 
