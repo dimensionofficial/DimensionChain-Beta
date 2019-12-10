@@ -20,6 +20,7 @@ cd dimension/Docker
 docker build . -t dimension/dimension
 ```
 
+
 The above will build off the most recent commit to the master branch by default. If you would like to target a specific branch/tag, you may use a build argument. For example, if you wished to generate a docker image based off of the v1.7.0 tag, you could do the following:
 
 ```bash
