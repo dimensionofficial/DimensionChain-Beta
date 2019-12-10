@@ -39,7 +39,6 @@ docker build -t dimension/dimension --build-arg symbol=<symbol> .
 docker run --name nodeon -p 8888:8888 -p 9876:9876 -t eonio/eon nodeond.sh -e --http-alias=nodeon:8888 --http-alias=127.0.0.1:8888 --http-alias=localhost:8888 arg1 arg2
 ```
 
-
 By default, all data is persisted in a docker volume. It can be deleted if the data is outdated or corrupted:
 
 ```bash
